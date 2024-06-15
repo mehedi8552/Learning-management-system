@@ -2,13 +2,10 @@
 const jwt = require("jsonwebtoken");
 const roles = require("./roles");
 
-
 // Middleware to authenticate user
 function authenticateToken(req, res, next) {
-    console.log("i am authenticateToken");
-    //res.cookie("token", token, options);
-    const token = req.cookies.token;
-  console.log(token);
+  //res.cookie("token", token, options);
+  const token = req.cookies.token;
 
   if (!token) return res.status(401).send("Access Denied");
 
