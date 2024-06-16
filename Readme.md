@@ -1,24 +1,42 @@
 Route->
+
+## user section:
 register -done 15 jun
 login -done 15 jun
 viewAllUsers -done 15 jun
 viewProfileByID -done 15 jun
 
+## User Management Endpoints:2
 
+Update a user: PUT /users/:id
+Delete a user: DELETE /users/:id
 
-User Management Endpoints:
-Create a user: POST /api/users
-Update a user: PUT /api/users/:id
-Delete a user: DELETE /api/users/:id
+## Course Management Endpoints:4
 
-Course Management Endpoints:
-Create a course: POST /api/courses-done 15 jun
-Update a course: PUT /api/courses/:id
-Delete a course: DELETE /api/courses/:id
+Create a course: POST /Create-course-done 15 jun
+Update a course: PUT /course/:id
+Delete a course: DELETE /course/:id
+Read course byid: GET /Read-course-by-id/:id
+Read all course: GET /Read-course
 
+## Course Modules:
 
-Course Details:
-View course video: GET /ViewById/:id //Viewvideo
-Delete course video: GET /DeleteById/:id //Viewvideo
-Update course video: GET /UpdateById/:id //Viewvideo
-Create course video: GET /Create/:id //Viewvideo
+Create a module : POST /Create-module
+Update a module : POST /Update-module
+Delete a module : POST /Delete-module
+Read by id module : GET /Read-module-by-id/:id
+Read all module : GET /Read-course
+
+## Content Section:
+
+Read all video: GET /View-all-video/:id
+Read a video: GET /ViewById/:id
+Delete a video : GET /DeleteById/:id
+Update a video: GET /UpdateById/:id
+Create a video: GET /Create/:id
+
+## Filter
+
+List courses By Category:
+Serach Courses:
+instractor list:

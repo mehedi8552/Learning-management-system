@@ -34,25 +34,6 @@ app.get("/", async (req, res) => {
 app.use("/auth",require("./src/routes/UserApi"));//Auth api
 app.use("/courses",require("./src/routes/CoursesApi"));//Auth api
 
-// Protected Route for managing users (only superadmin and admin)
-app.post(
-  "/manageUsers",
-  authenticateToken,
-  authorizeRole("manageUsers"),
-  (req, res) => {
-    res.send("Manage Users");
-  }
-);
-
-// Protected Route for managing comments (only superadmin and admin)
-app.post(
-  "/manageComments",
-  authenticateToken,
-  authorizeRole("manageComments"),
-  (req, res) => {
-    res.send("Manage Comments");
-  }
-);
 
 // Start Server
 app.listen(3000, () => {

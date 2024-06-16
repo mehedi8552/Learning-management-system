@@ -1,6 +1,6 @@
 const roles = {
-    superadmin: ['viewAllUsers', 'manageUsers', 'manageComments', 'viewProfile','createPost','viewPosts'],
-    admin: ['viewAllUsers', 'manageUsers', 'manageComments', 'viewProfile','createPost','viewPosts'],
+    superadmin: ['viewAllUsers', 'manageUsers', 'manageCourse', 'viewProfile','createCourse','viewPosts'],
+    admin: ['viewAllUsers', 'manageCourse', 'manageComments', 'viewProfile','createCourse','viewPosts'],
     user: ['viewPosts', 'viewProfile']
 };
 
