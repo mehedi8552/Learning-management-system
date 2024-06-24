@@ -5,7 +5,7 @@ exports.SignUp = async (req, res) => {
   res.status(200).json(result);
 };
 exports.Login = async (req, res) => {
-  let result = await LoginService(req);
+  let result = await LoginService(req,res);
   res.status(200).json(result);
 };
 exports.viewAllUsers = async (req, res) => {

@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const User = require("../Model/User");
+const User = require("../Model/UserModel");
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
 const SignUpService = async (req, res) => {
@@ -28,24 +28,22 @@ const LoginService = async (req, res) => {
       { _id: user._id, role: user.role },
       "your_jwt_secret"
     );
-
     // Configure the `token` HTTPOnly cookie
-    let options = {
-      maxAge: 7 * 24 * 60 * 60 * 1000, // expire after 7 days
-      httpOnly: true, // Cookie will not be exposed to client side code
-      sameSite: "none", // If client and server origins are different
-      secure: true, // use with HTTPS only
+    const options = {
+      httpOnly: true,
+      secure: true,
+      maxAge: 1000 * 60 * 60 * 24,
     };
-    res.cookie("token", token, options);
+    const cookie = res.cookie("token", token, options);
+
     return {
       status: "success",
-      data: "Login success! and Cookie has been set!",
+      data: "Login success!"
     };
   } catch (e) {
     return { status: "Faild", message: e.toString() };
   }
 };
-
 
 const viewAllUserService = async (req, res) => {
   try {
@@ -59,22 +57,21 @@ const viewAllUserService = async (req, res) => {
   }
 };
 
-const viewProfileServices = async (req,res)=>{
-  try{
-    
+const viewProfileServices = async (req, res) => {
+  try {
     let ProfileID = new ObjectId(req.params.id);
     const profileData = await User.findById({ _id: ProfileID });
     return {
       status: "success",
       data: profileData,
     };
-  }catch(e){
+  } catch (e) {
     return { status: "Faild", message: e.toString() };
   }
-}
+};
 module.exports = {
   SignUpService,
   LoginService,
   viewAllUserService,
-  viewProfileServices
+  viewProfileServices,
 };

@@ -1,55 +1,91 @@
-const Course = require("../Model/Course");
+const Course = require("../Model/CourseModel");
+const mongoose = require("mongoose");
+const ObjectId = mongoose.Types.ObjectId;
+const CreateCourceService = async (req, res) => {
+  try {
+    const instructorID = req.params.instructorID;
+    const { title, description, Category } = req.body;
 
+    const course = new Course({
+      title,
+      description,
+      instructorID,
+      Category,
+    });
 
+    const newCourse = await course.save();
 
-const createCourceService = async (req, res) => {
-    try {
-        const instructorID = req.params.instructorID
-        const { title, description, modules } = req.body;
-           
-        const course = new Course({
-          title,
-          description,
-          instructorID,
-          modules
-        });
-      
-          const newCourse = await course.save();
+    return {
+      status: "success",
+      data: newCourse,
+    };
+  } catch (e) {
+    return { status: "Faild", message: e.toString() };
+  }
+};
 
+const ReadAllCourceService = async (req, res) => {
+  try {
+    const CourseData = await Course.find();
+    return {
+      status: "success",
+      data: CourseData,
+    };
+  } catch (e) {
+    return { status: "Faild", message: e.toString() };
+  }
+};
+
+const UpdateCourceService = async (req, res) => {
+  try {
+    let CourceID = new ObjectId(req.params.CourceID);
+    let reqbody = req.body;
+    let data = await Course.findByIdAndUpdate(CourceID, reqbody);
+    return {
+      status: "success",
+      data: data,
+    };
+  } catch (e) {
+    return { status: "Faild", message: e.toString() };
+  }
+};
+
+const ReadCourceByIdService = async (req, res) => {
+  try {
+    let CourceID = new ObjectId(req.params.CourceID);
+    let ReadByIdData = await Course.findById(CourceID);
+    return {
+      status: "success",
+      data: ReadByIdData,
+    };
+  } catch (e) {
+    return { status: "Faild", message: e.toString() };
+  }
+};
+
+const DeleteCourceService = async (req, res) => {
+  try {
+    let CourceID = new ObjectId(req.params.CourceID);
+    let res = await Course.deleteMany({ _id: CourceID });
+    if (res.deletedCount === 1) {
       return {
         status: "success",
-        data: newCourse,
+        message: "Your course is removed"
       };
-    } catch (e) {
-      return { status: "Faild", message: e.toString() };
+    } else {
+      return {
+        status: "Faild"
+      };
     }
-  };
-
-  
-  
-  // Protected Route for viewing posts (only regular users)
-//   app.get(
-//     "/viewPosts",
-//     authenticateToken,
-//     authorizeRole("viewPosts"),
-//     (req, res) => {
-//       res.send("View Posts");
-//     }
-//   );
-
-//   const LoginService = async (req, res) => {
-//     try {
-     
-//       return {
-//         status: "success",
-//         data: "Login success! and Cookie has been set!",
-//       };
-//     } catch (e) {
-//       return { status: "Faild", message: e.toString() };
-//     }
-//   };
+  } catch (e) {
+    return { status: "Faild", message: e.toString() };
+  }
+};
 
 module.exports = {
-    createCourceService,
-    //LoginService,
-  };
+  CreateCourceService,
+  ReadAllCourceService,
+  ReadCourceByIdService,
+  DeleteCourceService,
+  UpdateCourceService,
+};
