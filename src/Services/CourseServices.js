@@ -1,6 +1,8 @@
 const Course = require("../Model/CourseModel");
+const Module = require("../Model/ModuleModel");
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
+
 const CreateCourceService = async (req, res) => {
   try {
     const instructorID = req.params.instructorID;
@@ -82,10 +84,118 @@ const DeleteCourceService = async (req, res) => {
   }
 };
 
+
+// Course Modules Management Endpoints:
+const CreateModuleService = async (req, res) => {
+  try {
+
+    const { title, description, CourceID } = req.body;
+    const ModuleData = new Module({
+      title,
+      description,
+      CourceID
+    });
+
+    const newModule = await ModuleData.save();
+
+    return {
+      status: "success",
+      data: newModule,
+    };
+  } catch (e) {
+    return { status: "Faild", message: e.toString() };
+  }
+};
+
+const ReadCourceByinsIDService = async (req, res) => {
+  try {
+
+    let InsID = new ObjectId(req.params.InsID);
+    let ReadByIdData = await Course.find({instructorID:InsID});
+    return {
+      status: "success",
+      data: ReadByIdData,
+    };
+  } catch (e) {
+    return { status: "Faild", message: e.toString() };
+  }
+};
+
+const UpdateModuleService = async (req, res) => {
+  try {
+    let ModuleID = new ObjectId(req.params.ModuleID);
+    let reqbody = req.body;
+    let data = await Module.findByIdAndUpdate({_id:ModuleID}, reqbody);
+    return {
+      status: "success",
+      data: data,
+    };
+  } catch (e) {
+    return { status: "Faild", message: e.toString() };
+  }
+};
+
+const DeleteModuleService = async (req, res) => {
+  try {
+    let ModuleID = new ObjectId(req.params.ModuleID);
+    let data = await Module.findByIdAndDelete({_id:ModuleID});
+    return {
+      status: "success",
+      data: data,
+    };
+  } catch (e) {
+    return { status: "Faild", message: e.toString() };
+  }
+};
+
+const ReadModuleByIdService = async (req, res) => {
+  try {
+    let ModuleID = new ObjectId(req.params.ModuleID);
+    let ReadByIdData = await Module.find({_id:ModuleID});
+    return {
+      status: "success",
+      data: ReadByIdData,
+    };
+  } catch (e) {
+    return { status: "Faild", message: e.toString() };
+  }
+};
+
+const ReadAllModuleService = async (req, res) => {
+  try {
+      const ReadAllModule = await Module.find()
+    return {
+      status: "success",
+      data: ReadAllModule,
+    };
+  } catch (e) {
+    return { status: "Faild", message: e.toString() };
+  }
+};
+// const ReadCourceByIdService = async (req, res) => {
+//   try {
+
+//     return {
+//       status: "success",
+//       data: ReadByIdData,
+//     };
+//   } catch (e) {
+//     return { status: "Faild", message: e.toString() };
+//   }
+// };
+
+
 module.exports = {
   CreateCourceService,
   ReadAllCourceService,
   ReadCourceByIdService,
   DeleteCourceService,
   UpdateCourceService,
+
+  CreateModuleService,
+  ReadCourceByinsIDService,
+  UpdateModuleService,
+  DeleteModuleService,
+  ReadModuleByIdService,
+  ReadAllModuleService
 };

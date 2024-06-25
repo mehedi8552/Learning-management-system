@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const CourseController = require("../Controller/CourseController");
-const CourseServices = require("../Services/CourseServices")
+const CourseServices = require("../Services/CourseServices");
 const { authenticateToken, authorizeRole } = require("../../authMiddleware");
 
 router.get("/", (req, res) => {
@@ -21,7 +21,7 @@ router.post(
   authorizeRole("manageCourse"),
   CourseController.UpdateCource
 );
-router.get("/ReadAllCource",authenticateToken,CourseController.ReadAllCource);
+router.get("/ReadAllCource", authenticateToken, CourseController.ReadAllCource);
 
 router.post(
   "/DeleteCource/:CourceID",
@@ -30,11 +30,15 @@ router.post(
   CourseController.DeleteCource
 );
 
-router.get(
-  "/ReadCourceById/:CourceID",
-  CourseController.ReadCourceById
-);
+router.get("/ReadCourceById/:CourceID", CourseController.ReadCourceById);
 
+//Course Modules Management Endpoints:
 
+router.post("/CreateModule", authenticateToken,  authorizeRole("manageCourse"), CourseController.CreateModule);
+router.post("/UpdateModule/:ModuleID", authenticateToken,  authorizeRole("manageCourse"), CourseController.UpdateModule);
+router.post("/DeleteModule/:ModuleID", authenticateToken,  authorizeRole("manageCourse"), CourseController.DeleteModule);
+router.get("/ReadModuleById/:ModuleID", CourseController.ReadModuleById);
+router.get("/ReadAllModule", CourseController.ReadAllModule);
+router.get("/ReadCourceByinsID/:InsID", authenticateToken,  authorizeRole("manageCourse"), CourseController.ReadCourceByinsID);
 
 module.exports = router;

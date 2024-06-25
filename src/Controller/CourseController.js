@@ -4,6 +4,14 @@ const {
    ReadCourceByIdService,
    DeleteCourceService,
   UpdateCourceService,
+
+
+  CreateModuleService,
+  ReadCourceByinsIDService,
+  UpdateModuleService,
+  DeleteModuleService,
+  ReadModuleByIdService,
+  ReadAllModuleService
 } = require("../Services/CourseServices");
 
 exports.CreateCource = async (req, res) => {
@@ -27,3 +35,29 @@ exports.ReadCourceById = async (req, res) => {
   res.status(200).json(result);
 };
 
+// Course Modules Management Endpoints:
+exports.CreateModule = async (req, res) => {
+  let result = await CreateModuleService(req);
+  res.status(200).json(result);
+};
+exports.ReadCourceByinsID = async (req, res) => {
+  let result = await ReadCourceByinsIDService(req);
+  res.status(200).json(result);
+};
+exports.UpdateModule = async (req, res) => {
+  let result = await UpdateModuleService(req);
+  res.status(200).json(result);
+};
+exports.DeleteModule = async (req, res) => {
+  let result = await DeleteModuleService(req);
+  res.status(200).json(result);
+};
+
+exports.ReadModuleById = async (req, res) => {
+  let result = await   ReadModuleByIdService(req);
+  res.status(200).json(result);
+};
+exports.ReadAllModule = async (req, res) => {
+  let result = await ReadAllModuleService(req);
+  res.status(200).json(result);
+};

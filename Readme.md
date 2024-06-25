@@ -19,11 +19,12 @@ Delete a course: DELETE /course/:id
 Read course byid: GET /Read-course-by-id/:id
 Read all course: GET /Read-course
 
-## Course Modules:
+## Course Modules Management Endpoints:
 
 Create a module : POST /Create-module
-Update a module : POST /Update-module
-Delete a module : POST /Delete-module
+Update by id module : POST /Update-module-by-id/:id
+Delete by id module : POST /Delete-module-by-id/:id
+Read Cource By instractor ID : POST /ReadCourceByinsID/:InsID
 Read by id module : GET /Read-module-by-id/:id
 Read all module : GET /Read-course
 
