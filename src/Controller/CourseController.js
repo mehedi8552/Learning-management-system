@@ -11,7 +11,9 @@ const {
   UpdateModuleService,
   DeleteModuleService,
   ReadModuleByIdService,
-  ReadAllModuleService
+  ReadAllModuleService,
+
+  FileUploadService,
 } = require("../Services/CourseServices");
 
 exports.CreateCource = async (req, res) => {
@@ -60,4 +62,12 @@ exports.ReadModuleById = async (req, res) => {
 exports.ReadAllModule = async (req, res) => {
   let result = await ReadAllModuleService(req);
   res.status(200).json(result);
+};
+exports.FileUpload = async (req, res) => {
+  if(!req){
+    console.log(req);
+    return res.status(400).json({message:"No File Found"});
+  }else{
+    return res.status(200).json({message:"File Upload Success"});
+  }
 };

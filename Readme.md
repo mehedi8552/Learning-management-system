@@ -34,7 +34,7 @@ Read all video: GET /View-all-video/:id
 Read a video: GET /ViewById/:id
 Delete a video : GET /DeleteById/:id
 Update a video: GET /UpdateById/:id
-Create a video: GET /Create/:id
+Upload a video: GET /Create/:id
 
 ## Filter
 

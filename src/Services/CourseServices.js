@@ -1,6 +1,7 @@
 const Course = require("../Model/CourseModel");
 const Module = require("../Model/ModuleModel");
 const mongoose = require("mongoose");
+const multer = require("multer");
 const ObjectId = mongoose.Types.ObjectId;
 
 const CreateCourceService = async (req, res) => {
@@ -72,11 +73,11 @@ const DeleteCourceService = async (req, res) => {
     if (res.deletedCount === 1) {
       return {
         status: "success",
-        message: "Your course is removed"
+        message: "Your course is removed",
       };
     } else {
       return {
-        status: "Faild"
+        status: "Faild",
       };
     }
   } catch (e) {
@@ -84,16 +85,14 @@ const DeleteCourceService = async (req, res) => {
   }
 };
 
-
 // Course Modules Management Endpoints:
 const CreateModuleService = async (req, res) => {
   try {
-
     const { title, description, CourceID } = req.body;
     const ModuleData = new Module({
       title,
       description,
-      CourceID
+      CourceID,
     });
 
     const newModule = await ModuleData.save();
@@ -109,9 +108,8 @@ const CreateModuleService = async (req, res) => {
 
 const ReadCourceByinsIDService = async (req, res) => {
   try {
-
     let InsID = new ObjectId(req.params.InsID);
-    let ReadByIdData = await Course.find({instructorID:InsID});
+    let ReadByIdData = await Course.find({ instructorID: InsID });
     return {
       status: "success",
       data: ReadByIdData,
@@ -125,7 +123,7 @@ const UpdateModuleService = async (req, res) => {
   try {
     let ModuleID = new ObjectId(req.params.ModuleID);
     let reqbody = req.body;
-    let data = await Module.findByIdAndUpdate({_id:ModuleID}, reqbody);
+    let data = await Module.findByIdAndUpdate({ _id: ModuleID }, reqbody);
     return {
       status: "success",
       data: data,
@@ -138,7 +136,7 @@ const UpdateModuleService = async (req, res) => {
 const DeleteModuleService = async (req, res) => {
   try {
     let ModuleID = new ObjectId(req.params.ModuleID);
-    let data = await Module.findByIdAndDelete({_id:ModuleID});
+    let data = await Module.findByIdAndDelete({ _id: ModuleID });
     return {
       status: "success",
       data: data,
@@ -151,7 +149,7 @@ const DeleteModuleService = async (req, res) => {
 const ReadModuleByIdService = async (req, res) => {
   try {
     let ModuleID = new ObjectId(req.params.ModuleID);
-    let ReadByIdData = await Module.find({_id:ModuleID});
+    let ReadByIdData = await Module.find({ _id: ModuleID });
     return {
       status: "success",
       data: ReadByIdData,
@@ -163,7 +161,7 @@ const ReadModuleByIdService = async (req, res) => {
 
 const ReadAllModuleService = async (req, res) => {
   try {
-      const ReadAllModule = await Module.find()
+    const ReadAllModule = await Module.find();
     return {
       status: "success",
       data: ReadAllModule,
@@ -185,6 +183,22 @@ const ReadAllModuleService = async (req, res) => {
 // };
 
 
+//  পিকচার আপলোড করার জন্য স্টোরেজ সেটআপ
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploades/');
+  },
+  filename: function (req, file, cb) {
+    const name = Date.now() + "-" + file.originalname;
+    cb(null, name);
+  },
+});
+
+
+
+
+
+
 module.exports = {
   CreateCourceService,
   ReadAllCourceService,
@@ -197,5 +211,8 @@ module.exports = {
   UpdateModuleService,
   DeleteModuleService,
   ReadModuleByIdService,
-  ReadAllModuleService
+  ReadAllModuleService,
+
+  storage
+  
 };
