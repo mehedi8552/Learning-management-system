@@ -69,9 +69,48 @@ const viewProfileServices = async (req, res) => {
     return { status: "Faild", message: e.toString() };
   }
 };
+
+const UpdateUserDetailsService = async (req, res) => {
+  try {
+    const UserId = ObjectId(req.params.UserId);
+    const reqbody = req.body;
+    reqbody.userID = UserId;
+    let data = await UserDetails.updateOne(
+      { UserID: UserId },
+      { set: reqbody },
+      { upsert: true }
+    );
+
+    return {
+      status: "success",
+      data: data,
+    };
+  } catch (e) {
+    return { status: "Faild", message: e.toString() };
+  }
+};
+const ReadUserDetailsService = async (req) => {
+  const UserId = ObjectId(req.params.UserId);
+  let result = await UserDetails.find({ UserID: UserId });
+  return { status: "success", data: result };
+};
+//  পিকচার আপলোড করার জন্য স্টোরেজ সেটআপ
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "uploades/");
+  },
+  filename: function (req, file, cb) {
+    const name = Date.now() + "-" + file.originalname;
+    cb(null, name);
+  },
+});
+
 module.exports = {
   SignUpService,
   LoginService,
   viewAllUserService,
   viewProfileServices,
+  storage,
+  UpdateUserDetailsService,
+  ReadUserDetailsService
 };

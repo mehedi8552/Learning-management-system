@@ -1,41 +1,31 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-// Define the Content schema
-const contentSchema = new Schema({
-  content_id: {
-    type: Schema.Types.ObjectId,
-    required: true,
-    unique: true,
-    auto: true,
+const contentSchema = new Schema(
+  {
+    moduleID: {
+      type: Schema.Types.ObjectId,
+      ref: "Module", 
+    },
+    UserID: {
+      type: Schema.Types.ObjectId,
+      ref: "Module", 
+    },
+    title: {
+      type: String,
+      default: "",
+    },
+    url: {
+      type: String,
+      default: "",
+    },
   },
-  module_id: {
-    type: Schema.Types.ObjectId,
-    required: true,
-    ref: 'Module',  // Assuming you have a Module model
-  },
-  type: {
-    type: String,
-    required: true,
-    enum: ['video', 'pdf'],
-  },
-  title: {
-    type: String,
-    default: '',
-  },
-  url: {
-    type: String,
-    default: '',
-  },
-  file_path: {
-    type: String,
-    default: '',
+  {
+    timestamps: true,
   }
-}, {
-  timestamps: true
-});
+);
 
 // Create the Content model
-const Content = mongoose.model('Content', contentSchema);
+const Content = mongoose.model("Content", contentSchema);
 
 module.exports = Content;

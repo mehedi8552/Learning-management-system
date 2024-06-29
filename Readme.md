@@ -41,3 +41,6 @@ Upload a video: GET /Create/:id
 List courses By Category:
 Serach Courses:
 instractor list:
+
+## create a model for user details...
+prfile,present address,parmanent address,mobile number,age,work

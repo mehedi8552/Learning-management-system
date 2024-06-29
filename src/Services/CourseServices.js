@@ -1,5 +1,7 @@
 const Course = require("../Model/CourseModel");
 const Module = require("../Model/ModuleModel");
+const Content = require("../Model/ContentModel");
+const UserDetails = require("../Model/UserDetails");
 const mongoose = require("mongoose");
 const multer = require("multer");
 const ObjectId = mongoose.Types.ObjectId;
@@ -182,21 +184,97 @@ const ReadAllModuleService = async (req, res) => {
 //   }
 // };
 
-
-//  পিকচার আপলোড করার জন্য স্টোরেজ সেটআপ
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploades/');
-  },
-  filename: function (req, file, cb) {
-    const name = Date.now() + "-" + file.originalname;
-    cb(null, name);
-  },
-});
+//  Content Section:--------------------------------
 
 
 
+const CreateFileService = async (req, res) => {
+  try {
+    const reqbody = req.body;
 
+    const course = new Content(reqbody);
+    const data = await course.save();
+    return {
+      status: "success",
+      data: data,
+    };
+  } catch (e) {
+    return { status: "Faild", message: e.toString() };
+  }
+};
+const UpdateFileService = async (req, res) => {
+  try {
+    let ContentID = new ObjectId(req.params.ContentID);
+    let reqbody = req.body;
+    let data = await Content.findByIdAndUpdate({ _id: ContentID }, reqbody);
+    return {
+      status: "success",
+      data: data,
+    };
+  } catch (e) {
+    return { status: "Faild", message: e.toString() };
+  }
+};
+
+const DeleteFileService = async (req, res) => {
+  try {
+    let ContentID = new ObjectId(req.params.ContentID);
+    let res = await Content.deleteMany({ _id: ContentID });
+    if (res.deletedCount === 1) {
+      return {
+        status: "success",
+        message: "Your Content is removed",
+      };
+    } else {
+      return {
+        status: "Faild",
+      };
+    }
+  } catch (e) {
+    return { status: "Faild", message: e.toString() };
+  }
+};
+
+const ReadFileByIdService = async (req, res) => {
+  try {
+    let ContentID = new ObjectId(req.params.ContentID);
+    let ReadByIdData = await Content.find({ _id: ContentID });
+    return {
+      status: "success",
+      data: ReadByIdData,
+    };
+  } catch (e) {
+    return { status: "Faild", message: e.toString() };
+  }
+};
+
+const ReadAllFileService = async (req, res) => {
+  try {
+    const ReadAllModule = await Content.find();
+    return {
+      status: "success",
+      data: ReadAllModule,
+    };
+  } catch (e) {
+    return { status: "Faild", message: e.toString() };
+  }
+};
+
+const SearchByRemarkService = async (req) => {
+  try {
+    const searchTerm = req.params.keyword;
+    const searchResults = await Course.find({
+      $or: [
+        { title: { $regex: searchTerm, $options: "i" } }, // Search by title
+        { Description: { $regex: searchTerm, $options: "i" } }, // Search by description
+        { Category: { $regex: searchTerm, $options: "i" } },
+      ],
+    });
+    return { status: "success", data: searchResults };
+  } catch (e) {
+    return { status: "fail", data: e.toString() };
+  }
+};
 
 
 module.exports = {
@@ -213,6 +291,13 @@ module.exports = {
   ReadModuleByIdService,
   ReadAllModuleService,
 
-  storage
-  
+
+  CreateFileService,
+  UpdateFileService,
+  DeleteFileService,
+  ReadFileByIdService,
+  ReadAllFileService,
+
+  SearchByRemarkService,
+
 };

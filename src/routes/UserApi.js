@@ -20,7 +20,21 @@ router.get(
   UserController.viewProfile
 );
 
-
-
+// Save UserProfile Details------------------api
+router.get(
+  "/UpdateUserDetails/:UserId",
+  authenticateToken,
+  UserController.UserDetails
+);
+router.get(
+  "/ReadUserDetails/:UserId",
+  authenticateToken,
+  UserController.ReadUserDetails
+);
+router.post(
+  "/UpdateFile/:ContentID",
+  authenticateToken,
+  UserController.UpdateFile
+);
 
 module.exports = router;

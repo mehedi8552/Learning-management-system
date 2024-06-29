@@ -13,7 +13,15 @@ const {
   ReadModuleByIdService,
   ReadAllModuleService,
 
-  FileUploadService,
+  CreateFileService,
+  UpdateFileService,
+  DeleteFileService,
+  ReadFileByIdService,
+  ReadAllFileService,
+
+  SearchByRemarkService,
+
+
 } = require("../Services/CourseServices");
 
 exports.CreateCource = async (req, res) => {
@@ -63,11 +71,32 @@ exports.ReadAllModule = async (req, res) => {
   let result = await ReadAllModuleService(req);
   res.status(200).json(result);
 };
-exports.FileUpload = async (req, res) => {
-  if(!req){
-    console.log(req);
-    return res.status(400).json({message:"No File Found"});
-  }else{
-    return res.status(200).json({message:"File Upload Success"});
-  }
+
+
+exports.CreateFile = async (req, res) => {
+  let result = await CreateFileService(req);
+  res.status(200).json(result);
 };
+exports.UpdateFile = async (req, res) => {
+  let result = await UpdateFileService(req);
+  res.status(200).json(result);
+};
+exports.DeleteFile = async (req, res) => {
+  let result = await DeleteFileService(req);
+  res.status(200).json(result);
+};
+exports.ReadFileById = async (req, res) => {
+  let result = await ReadFileByIdService(req);
+  res.status(200).json(result);
+};
+exports.ReadAllFile = async (req, res) => {
+  let result = await ReadAllFileService(req);
+  res.status(200).json(result);
+};
+
+
+exports.SearchByRemark = async (req, res) => {
+  let result = await SearchByRemarkService(req);
+  res.status(200).json(result);
+};
+
