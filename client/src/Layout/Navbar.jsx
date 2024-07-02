@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode';
-
+import Cookies from 'js-cookie'
 const Navbar = () => {
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
+  const token = Cookies.get('token')
   let role = null;
 
   if (token) {
@@ -13,7 +13,7 @@ const Navbar = () => {
   }
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    Cookies.remove('token')
     navigate('/login');
   };
 

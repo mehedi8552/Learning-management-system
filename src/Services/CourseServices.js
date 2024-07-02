@@ -1,9 +1,9 @@
 const Course = require("../Model/CourseModel");
 const Module = require("../Model/ModuleModel");
 const Content = require("../Model/ContentModel");
-const UserDetails = require("../Model/UserDetails");
+
 const mongoose = require("mongoose");
-const multer = require("multer");
+
 const ObjectId = mongoose.Types.ObjectId;
 
 const CreateCourceService = async (req, res) => {
@@ -186,8 +186,6 @@ const ReadAllModuleService = async (req, res) => {
 
 //  Content Section:--------------------------------
 
-
-
 const CreateFileService = async (req, res) => {
   try {
     const reqbody = req.body;
@@ -276,7 +274,6 @@ const SearchByRemarkService = async (req) => {
   }
 };
 
-
 module.exports = {
   CreateCourceService,
   ReadAllCourceService,
@@ -291,7 +288,6 @@ module.exports = {
   ReadModuleByIdService,
   ReadAllModuleService,
 
-
   CreateFileService,
   UpdateFileService,
   DeleteFileService,
@@ -299,5 +295,4 @@ module.exports = {
   ReadAllFileService,
 
   SearchByRemarkService,
-
 };

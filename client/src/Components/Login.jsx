@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import Cookies from "js-cookie";
 const Login = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   const handleChange = (e) => {
@@ -16,12 +16,15 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/login', form);
-      localStorage.setItem('token', response.data);
+      const response = await axios.post(
+        "http://localhost:3000/auth/login",
+        form
+      );
+      Cookies.set("token", response.data["token"], { expires: 7 });
       navigate("/dashboard");
-      alert('Login successful');
+      alert("Login successful");
     } catch (error) {
-      alert('Login failed');
+      alert("Login failed");
     }
   };
 
@@ -45,7 +48,12 @@ const Login = () => {
           value={form.password}
           onChange={handleChange}
         />
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded w-full">Login</button>
+        <button
+          type="submit"
+          className="bg-blue-500 text-white p-2 rounded w-full"
+        >
+          Login
+        </button>
       </form>
     </div>
   );

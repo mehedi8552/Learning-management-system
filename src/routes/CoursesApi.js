@@ -1,9 +1,7 @@
 const router = require("express").Router();
-
 const CourseController = require("../Controller/CourseController");
-const CourseServices = require("../Services/CourseServices");
 const { authenticateToken, authorizeRole } = require("../../authMiddleware");
-const multer = require("multer");
+
 router.get("/", (req, res) => {
   res.send("courses Api running...");
 });
@@ -63,13 +61,7 @@ router.get(
 );
 
 // Content Section---------------------------api
-const upload = multer({ storage: CourseServices.storage });
-router.post(
-  "/PhotoUpload",
-  authenticateToken,
-  upload.array("image", 12),
-  CourseController.PhotoUpload
-);
+
 router.post(
   "/CreateFile",
   authenticateToken,

@@ -1,5 +1,7 @@
 const router = require("express").Router();
+const multer = require("multer");
 const UserController = require("../Controller/UserController");
+const AuthServices = require("../Services/AuthServices");
 const { authenticateToken, authorizeRole } = require("../../authMiddleware");
 router.get("/", (req, res) => {
   res.send("Auth Api running...");
@@ -31,10 +33,11 @@ router.get(
   authenticateToken,
   UserController.ReadUserDetails
 );
+const upload = multer({ storage: AuthServices.storage });
 router.post(
-  "/UpdateFile/:ContentID",
-  authenticateToken,
-  UserController.UpdateFile
+  "/PhotoUpload",
+  upload.array("image", 12),
+  UserController.PhotoUpload
 );
 
 module.exports = router;

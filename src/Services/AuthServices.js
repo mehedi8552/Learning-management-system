@@ -1,6 +1,8 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../Model/UserModel");
+const UserDetails = require("../Model/UserDetails");
+const multer = require("multer");
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
 const SignUpService = async (req, res) => {
@@ -33,12 +35,13 @@ const LoginService = async (req, res) => {
       httpOnly: true,
       secure: true,
       maxAge: 1000 * 60 * 60 * 24,
+      sameSite:"none"
     };
-    const cookie = res.cookie("token", token, options);
 
+    res.cookie("token", token, options);
     return {
       status: "success",
-      data: "Login success!"
+      token: token,
     };
   } catch (e) {
     return { status: "Faild", message: e.toString() };
@@ -112,5 +115,5 @@ module.exports = {
   viewProfileServices,
   storage,
   UpdateUserDetailsService,
-  ReadUserDetailsService
+  ReadUserDetailsService,
 };

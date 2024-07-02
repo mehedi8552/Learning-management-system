@@ -8,6 +8,7 @@ import Dashboard from './Components/Dashboard';
 import ProtectedRoute from './Components/ProtectedRoute';
 import Profile from './Components/Profile';
 import ViewAllUsers from './Components/ViewAllUsers';
+import Home from './Components/Home';
 //import ManageUsers from './Components/';
 //import ManageComments from './ManageComments';
 //import ViewPosts from './Components/';
@@ -18,8 +19,9 @@ const App = () => {
       <div>
         <Navbar />
         <Routes>
+        <Route path="/" element={<Home/>} />
           <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login/>} />
           <Route path="/view-profile-by-id/:id" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route path="/viewAllUsers" element={<ProtectedRoute><ViewAllUsers /></ProtectedRoute>} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard/></ProtectedRoute>} />
