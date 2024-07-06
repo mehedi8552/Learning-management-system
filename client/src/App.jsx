@@ -16,6 +16,7 @@ import AboutUs from './Components/AboutUs';
 import ContactUs from './Components/ContactUs';
 import Books from './Components/Books';
 import CoursePage from './Page/CoursePage';
+import AboutUsPage from './Page/AboutUsPage';
 
 const App = () => {
   return (
@@ -23,7 +24,7 @@ const App = () => {
         <Routes>   
           <Route path="/" element={<HomePage/>} />
           <Route path="/Course" element={<CoursePage/>} />
-          <Route path="/AboutUs" element={<AboutUs/>} />
+          <Route path="/AboutUs" element={<AboutUsPage/>} />
           <Route path="/ContactUs" element={<ContactUs/>} />
           <Route path="/Books" element={<Books/>} />
 
