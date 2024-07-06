@@ -16,11 +16,10 @@ const MyComponent = () => {
         navigate("/dashboard");
         toast("Form submitted successfully!");
       } 
-    //   else {
-    //     console.log("else");
-    //     navigate("/login");
-    //     return;
-    //   }
+      else {
+        navigate("/login");
+        return;
+      }
     } catch (error) {
       console.log("err");
       navigate("/dashboard");

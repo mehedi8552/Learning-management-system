@@ -2,22 +2,22 @@ import { create } from "zustand";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 // import Cookies from "js-cookie";
-const UserStore = create((set) => ({
+const CourseStore = create((set) => ({
 
-  ViewProfileData: null,
-  ViewProfile: async (_id) => {
+    CourseStoreData: null,
+    CourseReq: async (_id,body) => {
     let res = await axios.get(
-      `http://localhost:3000/auth/view-profile-by-id/${_id}`,
+      `http://localhost:3000/auth/view-profile-by-id/${_id}`,body,
 
       {
         withCredentials: true,
       }
     );
-    
+    // let res = await axios.post(`/api/v1/UpdateProfile`,postBody);
     if (res.data["status"] === "success") {
       set({ ViewProfileData: res.data["data"] });
     }
   },
 }));
 
-export default UserStore;
+export default CourseStore;

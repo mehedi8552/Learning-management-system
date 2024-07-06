@@ -4,7 +4,7 @@ import { FaFacebookF, FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 const Footer = () => {
   return (
-    <footer className=" sm:w-fit sm:space-y-4 md:flex md:justify-start md:space-x-2 md:w-fit p-10 py-10 md:pl-16 bg-blue-800 font-abc">
+    <footer className=" sm:w-fit sm:space-y-4 md:flex md:justify-start md:space-x-2 md:w-fit p-10 py-10 md:pl-16 bg-blue-500 font-abc">
       <div className="md:w-5/12">
         <div className="text-2xl font-bold">
           <span >CW</span>
