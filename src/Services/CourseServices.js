@@ -6,23 +6,22 @@ const mongoose = require("mongoose");
 
 const ObjectId = mongoose.Types.ObjectId;
 
+
+
 const CreateCourceService = async (req, res) => {
   try {
-    const instructorID = req.params.instructorID;
-    const { title, description, Category } = req.body;
-
     const course = new Course({
-      title,
-      description,
-      instructorID,
-      Category,
+      title: req.body.title,
+      image: req.file.buffer.toString("base64"),
+      description: req.body.description,
+      instructorID: req.params.instructorID,
+      Category: req.body.Category,
     });
-
-    const newCourse = await course.save();
-
+    
+     await course.save();
     return {
       status: "success",
-      data: newCourse,
+      data: "File uploaded successfully"
     };
   } catch (e) {
     return { status: "Faild", message: e.toString() };

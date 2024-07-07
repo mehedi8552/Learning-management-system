@@ -1,18 +1,37 @@
 const router = require("express").Router();
+const Course = require("../Model/CourseModel");
 const CourseController = require("../Controller/CourseController");
 const { authenticateToken, authorizeRole } = require("../../authMiddleware");
-
+const multer = require("multer");
 router.get("/", (req, res) => {
   res.send("courses Api running...");
 });
 
 // Course Management---------------------------api
+
 router.post(
   "/createCource/:instructorID",
   authenticateToken,
   authorizeRole("manageCourse"),
   CourseController.CreateCource
 );
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+router.post("/imageUpload/:instructorID", upload.single("image"), async (req, res) => {
+  try {
+    const data = new Course({
+      title: req.body.title,
+      image: req.file.buffer.toString("base64"),
+      description: req.body.description,
+      instructorID: req.params.instructorID,
+      Category: req.body.Category,
+    });
+    await data.save();
+    res.send("File uploaded successfully");
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
 
 router.post(
   "/UpdateCource/:CourceID",
