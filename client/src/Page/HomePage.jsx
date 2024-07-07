@@ -5,6 +5,7 @@ import Achivement from '../Components/Achivement';
 import Course from '../Components/Course';
 import Whay1Word from '../Components/Whay1Word';
 import OurBook from '../Components/OurBook';
+import HonarableParson from '../Components/HonarableParson';
 
 const HomePage = () => {
     return (
@@ -14,6 +15,7 @@ const HomePage = () => {
            <Course/>
            <Whay1Word/>
            <OurBook/>
+           <HonarableParson/>
         </Layout>
     );
 };
