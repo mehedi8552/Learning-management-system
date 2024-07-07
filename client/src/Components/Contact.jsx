@@ -47,13 +47,15 @@ const Contact = () => {
     }
   };
   return (
-    <section className="my-20">
-      <div className="space-y-4  md:flex md:justify-center   w-full">
-        <div className="flex pl-14 mt-4">
-          <FaMapLocationDot className="h-16 w-16 p-2  text-white bg-blue-500" />
+    <section className="my-20 px-10 lg:px-64">
+      <div className="space-x-4 space-y-4 lg:space-y-1 grid grid-cols-1  md:grid-cols-2 xl:grid-cols-3">
+      <div className="flex pl-4">
+          <FaMapLocationDot className="  h-16 w-16 p-2  text-white bg-blue-500" />
           <div>
-            <p className="font-bold pl-4  font-abc text-2xl ">ADDRESS</p>
-            <p className="text-grey2 pt-2 pl-4">Mirpur 11,Dhaka,Bangladesh</p>
+            <p className="font-bold pl-4 font-abc text-2xl ">EMAIL</p>
+            <p className="text-grey2 pt-2 pl-4">
+              <span className="font-semibold">Email :</span>mehedi193002106@.com
+            </p>
           </div>
         </div>
         <div className="flex">
@@ -86,7 +88,7 @@ const Contact = () => {
         </div>
         <div class="flex justify-center  mt-14 md:mb-10">
           <form
-            class="w-full md:w-full md:mx-80 space-y-3"
+            class="w-full md:w-full  space-y-3"
             ref={form}
             onSubmit={sendEmail}
           >
