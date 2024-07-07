@@ -4,13 +4,13 @@ import { FaFacebookF, FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 const Footer = () => {
   return (
-    <footer className=" sm:w-fit sm:space-y-4 md:flex md:justify-start md:space-x-2 md:w-fit p-10 py-10 md:pl-16 bg-blue-500 font-abc">
-      <div className="md:w-5/12">
-        <div className="text-2xl font-bold">
+    <footer className=" w-full xl:grid-cols-4 sm:grid sm:grid-cols-2   p-10 space-y-4 space-x-4 bg-blue-500">
+      <div className="">
+        <div className="text-2xl pt-4 font-bold">
           <span >CW</span>
           <span className="text-pink-700">T</span>
         </div>
-        <p className="text-justify 2 py-3  font-sans_serif pr-8 pb-2">
+        <p className="  ">
           Welcome to my creative corner! one Enthusiastic Full stack web
           developer & UI/UX designer with two years of digital Experience
           creating experiences that are visible Stunning and user-friendly.
