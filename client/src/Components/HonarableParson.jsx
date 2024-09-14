@@ -17,7 +17,7 @@ const CourseData = [
   },
   {
     _id: 0,
-    image: maruf,
+    image:maruf ,
     title: "মোঃ মারুফ বিল্লাহ ",
     Description: "এম এস সি ফ্রম বুয়েট ",
   },

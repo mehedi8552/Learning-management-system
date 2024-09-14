@@ -52,12 +52,12 @@ const Course = () => {
                   </p>
                 </div>
                 <div className="text-right pr-6">
-                  <button Link={""} className="flex ">
+                  <Link  to={"/CourseDetails"} className="flex ">
                     <p className="font-bold text-lg underline text-gray-700">
-                      Enroll Now{" "}
+                      Enroll Now
                     </p>
                     <FaArrowAltCircleRight className="mt-2 ml-2 text-lg text-gray-700" />
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

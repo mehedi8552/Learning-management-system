@@ -8,7 +8,7 @@ const AboutUs = () => {
         <p className="text-3xl pt-4 font-bold">কুরআন শিক্ষার সহজ পদ্ধতি</p>
       </div>
 
-      <div className=" xl:grid  xl:grid-cols-2 px-10   justify-center items-center xl:px-64 gap-4">
+      <div className=" xl:grid  xl:grid-cols-2 px-10 text-justify  justify-center items-center xl:px-64 gap-4">
         <p className="font-light text-gray-500">
           কুরআন সহীহ শুদ্ধ করে শিখে নেয়া অতীব জরুরী। যেহেতু আল্লাহ রাব্বুল
           আলামীন বলেছেন, وَرَتِّلِ الْقُرْﺇنَ تَرْتِيْلاً অর্থ: ধীরে ধীরে
@@ -29,7 +29,7 @@ const AboutUs = () => {
           src="https://www.youtube.com/embed/lR8FTt_BR00?autoplay=1&mute=1"
         ></iframe>
       </div>
-      <div className="pt-10 xl:px-64 xl:py-10 px-10">
+      <div className="pt-10 xl:px-64 xl:py-10 px-10 text-justify">
         <p className="font-light text-gray-500">
           <span className="font-bold">
             বিশিষ্ট ইসলামি চিন্তাবিদগণ বলেন, আমাদের নূরানী, নাদিয়া, বৈজ্ঞানিক

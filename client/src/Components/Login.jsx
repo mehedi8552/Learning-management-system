@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 const Login = () => {
@@ -31,7 +32,7 @@ const Login = () => {
   return (
     <div className="flex justify-center items-center h-screen">
       <form className="bg-white p-6 rounded shadow-md" onSubmit={handleSubmit}>
-        <h2 className="text-2xl mb-4">Login</h2>
+        <h2 className="text-2xl mb-4 text-center font-bold">Login</h2>
         <input
           type="email"
           name="email"
@@ -54,7 +55,12 @@ const Login = () => {
         >
           Login
         </button>
+        <div className="flex justify-center  pt-4">
+          <p>If you Don't have any account go to</p>
+          <Link  className="px-2 py-1 rounded text-white bg-green-600 ml-4" to={"/register"}>Sign Up</Link>
+        </div>
       </form>
+      
     </div>
   );
 };

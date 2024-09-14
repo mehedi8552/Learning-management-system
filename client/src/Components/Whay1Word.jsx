@@ -32,7 +32,7 @@ const Whay1Word = () => {
             <p className="text-4xl pt-4 font-bold">আমাদের কুরআন শিক্ষা কোর্স কেন সবচেয়ে সহজ?</p>
           </div>
   
-          <div className="grid grid-cols-1 text-center xl:pt-20 justify-center xl:mx-60  md:grid-cols-2 xl:grid-cols-3 gap-4 items-center sm:mx-10 pt-10 ">
+          <div className="grid grid-cols-1 text-center xl:pt-20 justify-center xl:mx-60  md:grid-cols-2 xl:grid-cols-3 gap-4 items-center mx-4 sm:mx-10 pt-10 ">
             {CourseData.map((data, i) => (
               <div className="h-full rounded  w-fit  pb-8 bg-slate-100 hover:shadow-md space-y-4">
                 <div className="pl-10 flex  justify-center pr-5 text-gray-600 text-lg pt-2 font-light">

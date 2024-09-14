@@ -47,7 +47,7 @@ const Contact = () => {
     }
   };
   return (
-    <section className="my-20 px-10 lg:px-64">
+    <section className="my-20 px-10 lg:px-56 xl:px-64">
       <div className="space-x-4 space-y-4 lg:space-y-1 grid grid-cols-1  md:grid-cols-2 xl:grid-cols-3">
       <div className="flex pl-4">
           <FaMapLocationDot className="  h-16 w-16 p-2  text-white bg-blue-500" />
@@ -83,7 +83,7 @@ const Contact = () => {
             Get In Touch
           </h1>
           <h1 className="flex justify-center text-xl px-8 text-center text-grey2">
-            Contact with Me For any type of project.
+            Contact with Us For any question.
           </h1>
         </div>
         <div class="flex justify-center  mt-14 md:mb-10">

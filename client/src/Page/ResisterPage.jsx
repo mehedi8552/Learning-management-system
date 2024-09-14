@@ -1,10 +1,10 @@
 import React from 'react';
 import Layout from '../Layout/Layout';
-import Dashbord from '../Components/Register';
+import Register from '../Components/Register';
 const ResisterPage = () => {
     return (
         <Layout>
-          <Dashbord/>  
+          <Register/>  
         </Layout>
     );
 };

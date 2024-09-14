@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [form, setForm] = useState({
-    name: '',
-    email: '',
-    password: '',
-    role: 'user',
+    name: "",
+    email: "",
+    password: "",
+    role: "user",
   });
 
   const handleChange = (e) => {
@@ -17,17 +17,23 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/auth/register', form);
+      const response = await axios.post(
+        "http://localhost:3000/auth/register",
+        form
+      );
+      console.log(response);
       alert("Registration Successfull");
+      
     } catch (error) {
-      alert('Registration failed');
+      alert("Registration failed");
     }
   };
+
 
   return (
     <div className="flex justify-center items-center h-screen">
       <form className="bg-white p-6 rounded shadow-md" onSubmit={handleSubmit}>
-        <h2 className="text-2xl mb-4">Register</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">Register</h2>
         <input
           type="text"
           name="name"
@@ -62,10 +68,20 @@ const Register = () => {
           <option value="admin">Admin</option>
           <option value="superadmin">Superadmin</option>
         </select>
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded w-full">Register</button>
+        <button
+          type="submit"
+          className="bg-blue-500 text-white p-2 rounded w-full"
+        >
+          Register
+        </button>
         <div className="flex justify-center  pt-4">
           <p>If you have any account go to</p>
-          <Link  className="px-2 py-1 rounded text-white bg-green-600 ml-4" to={"/"}>Login</Link>
+          <Link
+            className="px-2 py-1 rounded text-white bg-green-600 ml-4"
+            to={"/Login"}
+          >
+            Login
+          </Link>
         </div>
       </form>
     </div>

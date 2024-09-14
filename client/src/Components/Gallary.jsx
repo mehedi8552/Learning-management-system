@@ -22,10 +22,10 @@ let image = [
 const Gallary = () => {
   return (
     <div>
-      <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 px-10 py-4 xl:pb-8 xl:px-64">
+      <div className="grid grid-cols-2  xl:grid-cols-4 gap-4 px-10  xl:pb-8 xl:px-64">
         {image.map((item,i) => {
           return (
-            <div className="w-full h-full bg-white rounded">
+            <div className="w-full h-full py-10  bg-white rounded">
               <img className="w-full h-2/3 rounded" src={item.img} />
               <p>{item.title}</p>
             </div>
