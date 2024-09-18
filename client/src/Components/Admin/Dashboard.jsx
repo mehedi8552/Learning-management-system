@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
-import UserStore from "../Store/UserStore";
+import UserStore from "../../Store/UserStore";
 const MyComponent = () => {
   const { ViewProfile, ViewProfileData } = UserStore();
   const navigate = useNavigate();
