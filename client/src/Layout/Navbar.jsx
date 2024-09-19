@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import Cookies from "js-cookie";
 
 const Navbar = () => {
@@ -8,10 +8,12 @@ const Navbar = () => {
   const navigate = useNavigate();
   const token = Cookies.get("token");
   let role = null;
+  let Id = null;
 
   if (token) {
     const decodedToken = jwtDecode(token);
     role = decodedToken.role;
+    Id = decodedToken._id;
   }
 
   const handleLogout = () => {
@@ -32,6 +34,12 @@ const Navbar = () => {
             <>
               {role === "superadmin" && (
                 <>
+                  <Link
+                    to="/"
+                    className="text-white hover:text-gray-400"
+                  >
+                    Home
+                  </Link>
                   <Link
                     to="/viewAllUsers"
                     className="text-white hover:text-gray-400"
@@ -85,7 +93,7 @@ const Navbar = () => {
                 </>
               )}
               <Link
-                to="/viewProfile"
+                to={`/view-profile-by-id/${Id}`}
                 className="text-white hover:text-gray-400"
               >
                 Profile
@@ -243,16 +251,28 @@ const Navbar = () => {
                 <Link to="/" className="block text-white hover:text-gray-400">
                   Home
                 </Link>
-                <Link to="/Course" className="block text-white hover:text-gray-400">
+                <Link
+                  to="/Course"
+                  className="block text-white hover:text-gray-400"
+                >
                   Course
                 </Link>
-                <Link to="/Books" className="block text-white hover:text-gray-400">
+                <Link
+                  to="/Books"
+                  className="block text-white hover:text-gray-400"
+                >
                   Books
                 </Link>
-                <Link to="/AboutUs" className="block text-white hover:text-gray-400">
+                <Link
+                  to="/AboutUs"
+                  className="block text-white hover:text-gray-400"
+                >
                   About Us
                 </Link>
-                <Link to="/ContactUs" className="block text-white hover:text-gray-400">
+                <Link
+                  to="/ContactUs"
+                  className="block text-white hover:text-gray-400"
+                >
                   Contact Us
                 </Link>
                 <div className="relative">

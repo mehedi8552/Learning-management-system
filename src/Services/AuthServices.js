@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../Model/UserModel");
-const UserDetails = require("../Model/UserDetails");
+const UserModel = require("../Model/UserModel.js");
 const multer = require("multer");
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
@@ -63,7 +63,7 @@ const viewAllUserService = async (req, res) => {
 const viewProfileServices = async (req, res) => {
   try {
     let ProfileID = new ObjectId(req.params.id);
-    const profileData = await User.findById({ _id: ProfileID });
+    const profileData = await User.findById(ProfileID); 
     return {
       status: "success",
       data: profileData,
@@ -75,14 +75,15 @@ const viewProfileServices = async (req, res) => {
 
 const UpdateUserDetailsService = async (req, res) => {
   try {
-    const UserId = ObjectId(req.params.UserId);
+    const UserId = new ObjectId(req.params.UserId);
     const reqbody = req.body;
-    reqbody.userID = UserId;
-    let data = await UserDetails.updateOne(
-      { UserID: UserId },
-      { set: reqbody },
-      { upsert: true }
-    );
+    let data = await UserModel.findOneAndUpdate(
+      UserId,
+      reqbody,
+      {
+        returnOriginal: false
+      });
+    
 
     return {
       status: "success",

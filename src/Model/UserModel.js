@@ -18,6 +18,38 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    phone: {
+        type: Number,
+        required: true,
+    },
+    address: {
+        type: String,
+        required: true,
+    },
+    city: {
+        type: String,
+        required: true,
+    },
+    district: {
+        type: String,
+    },
+    village: {
+        type: String,
+        required: true,
+    },
+    dob: {
+        type: Date,
+    },
+    gender: {
+        type: String,
+    },
+    education: {
+        type: String,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
     role: {
         type: String,
         enum: ['superadmin', 'admin', 'user'],

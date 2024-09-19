@@ -23,8 +23,8 @@ router.get(
 );
 
 // Save UserProfile Details------------------api
-router.get(
-  "/UpdateUserDetails/:UserId",
+router.post(
+  "/Update-profile-by-id/:UserId",
   authenticateToken,
   UserController.UserDetails
 );
