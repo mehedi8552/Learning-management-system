@@ -55,6 +55,14 @@ const UserStore = create((set) => ({
       throw e;
     }
   },
+  // -------------------------------Create Course--------------------------------
+
+  CourseData:{
+    
+  }
+
+
+
 }));
 
 export default UserStore;

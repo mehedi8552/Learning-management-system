@@ -22,7 +22,7 @@ const Login = () => {
         form
       );
       Cookies.set("token", response.data["token"], { expires: 7 });
-      navigate("/dashboard");
+      navigate("/");
       alert("Login successful");
     } catch (error) {
       alert("Login failed");

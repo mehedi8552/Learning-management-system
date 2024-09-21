@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 const Profile = () => {
-  const [startDate, setStartDate] = useState(new Date());
+
   let {
     ViewProfileRequest,
     ViewProfileData,

@@ -10,18 +10,21 @@ const ObjectId = mongoose.Types.ObjectId;
 
 const CreateCourceService = async (req, res) => {
   try {
-    const course = new Course({
-      title: req.body.title,
-      image: req.file.buffer.toString("base64"),
-      description: req.body.description,
-      instructorID: req.params.instructorID,
-      Category: req.body.Category,
+    const { title, description, category } = req.body;
+    // Convert the image to base64
+    const imageBase64 = Buffer.from(req.file.buffer).toString('base64');
+    const newData = new Course({
+      title,
+      image: imageBase64,
+      description,
+      category
     });
-    
-     await course.save();
+
+    await newData.save();
     return {
       status: "success",
-      data: "File uploaded successfully"
+      data: newData,
+      message:"File uploaded successfully"
     };
   } catch (e) {
     return { status: "Faild", message: e.toString() };
@@ -92,6 +95,7 @@ const CreateModuleService = async (req, res) => {
     const { title, description, CourceID } = req.body;
     const ModuleData = new Module({
       title,
+      image:req.file.buffer.toString("base64"),
       description,
       CourceID,
     });

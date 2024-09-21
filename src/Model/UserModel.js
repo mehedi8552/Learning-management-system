@@ -20,22 +20,21 @@ const userSchema = new mongoose.Schema({
     },
     phone: {
         type: Number,
-        required: true,
     },
     address: {
         type: String,
-        required: true,
+
     },
     city: {
         type: String,
-        required: true,
+
     },
     district: {
         type: String,
     },
     village: {
         type: String,
-        required: true,
+
     },
     dob: {
         type: Date,

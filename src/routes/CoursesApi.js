@@ -9,29 +9,38 @@ router.get("/", (req, res) => {
 
 // Course Management---------------------------api
 
+// router.post(
+//   "/createCource/:instructorID",
+//   authenticateToken,
+//   authorizeRole("manageCourse"),
+//   CourseController.CreateCource
+// );
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 router.post(
   "/createCource/:instructorID",
   authenticateToken,
   authorizeRole("manageCourse"),
-  CourseController.CreateCource
-);
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-router.post("/imageUpload/:instructorID", upload.single("image"), async (req, res) => {
-  try {
-    const data = new Course({
-      title: req.body.title,
-      image: req.file.buffer.toString("base64"),
-      description: req.body.description,
-      instructorID: req.params.instructorID,
-      Category: req.body.Category,
-    });
-    await data.save();
-    res.send("File uploaded successfully");
-  } catch (error) {
-    res.status(500).send(error.message);
+  upload.single("image"),
+  async (req, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).send("No file uploaded");
+      }
+      const data = new Course({
+        image: req.file.buffer.toString("base64"),
+        title: req.body.title,
+        description: req.body.description,
+        instructorID: req.params.instructorID,
+        Category: req.body.Category,
+      });
+      await data.save();
+      res.send("File uploaded successfully");
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
   }
-});
+);
 
 router.post(
   "/UpdateCource/:CourceID",
