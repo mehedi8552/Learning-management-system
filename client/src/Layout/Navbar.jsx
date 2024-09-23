@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaHome, FaBook, FaSignOutAlt, FaHamburger } from "react-icons/fa";
+import { FaHome, FaBook, FaSignOutAlt, FaFolderPlus } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoCreateOutline } from "react-icons/io5";
 import { IoMdLogIn } from "react-icons/io";
@@ -31,13 +31,16 @@ const Navbar = () => {
 
   return (
     <nav className="bg-blue-400 p-6 font-bold">
-      <div className="container mx-auto flex justify-between items-center ">
+      <div className="container mx-auto flex justify-between  ">
         <div className="text-white text-3xl">
           <Link to="/" className="hover:text-gray-400">
             <span className="text-green-500">Quran</span> Shikkha
           </Link>
         </div>
-        <div className="hidden md:flex justify-end font-bold space-x-4">
+        {/* <div className="ml-80 mr-20 hidden md:block">
+          <input className="h-8 w-fit rounded" type="text" />
+        </div> */}
+        <div className="hidden md:flex justify-items-end font-bold space-x-4">
           <Link to="/" className="text-white hover:text-gray-400">
             Home
           </Link>
@@ -73,18 +76,11 @@ const Navbar = () => {
                           <FaHome /> <i>Profile</i>
                         </Link>
                         <Link
-                          to={`/dashbord/${Id}`}
+                          to={`/Dash`}
                           className="flex leading-5 space-x-2 px-7 py-3   hover:text-white  hover:bg-sky-400"
                         >
                           <MdDashboard />
                           <i>dashbord</i>
-                        </Link>
-                        <Link
-                          to={`/dashbord/${Id}`}
-                          className="flex leading-5 space-x-2 px-7 py-3   hover:text-white  hover:bg-sky-400"
-                        >
-                          <FaBook />
-                          <i>My learning</i>
                         </Link>
                         <Link
                           onClick={handleLogout}
@@ -118,15 +114,15 @@ const Navbar = () => {
                           to={`/dashbord/${Id}`}
                           className="flex leading-5 space-x-2 px-7 py-3   hover:text-white  hover:bg-sky-400"
                         >
-                          <MdDashboard />
-                          <i>dashbord</i>
+                          <FaFolderPlus />
+                          <i>Create Course</i>
                         </Link>
                         <Link
                           to={`/dashbord/${Id}`}
                           className="flex leading-5 space-x-2 px-7 py-3   hover:text-white  hover:bg-sky-400"
                         >
                           <FaBook />
-                          <i>My learning</i>
+                          <i>My Course</i>
                         </Link>
                         <Link
                           onClick={handleLogout}
@@ -155,13 +151,6 @@ const Navbar = () => {
                           className=" px-7 py-3 flex leading-5 space-x-2 hover:text-white  hover:bg-sky-400"
                         >
                           <FaHome /> <i>Profile</i>
-                        </Link>
-                        <Link
-                          to={`/dashbord/${Id}`}
-                          className="flex leading-5 space-x-2 px-7 py-3   hover:text-white  hover:bg-sky-400"
-                        >
-                          <MdDashboard />
-                          <i>dashbord</i>
                         </Link>
                         <Link
                           to={`/dashbord/${Id}`}
@@ -219,6 +208,7 @@ const Navbar = () => {
           )}
         </div>
         {/* ----------------------For small screen size--------------------------------------- */}
+        <div className="md:hidden">
         <div className="flex space-x-3">
           {token ? (
             <div div className="md:hidden">
@@ -276,14 +266,14 @@ const Navbar = () => {
                         className="flex leading-5 space-x-2 px-7 py-3   hover:text-white  hover:bg-sky-400"
                       >
                         <MdDashboard />
-                        <i>dashbord</i>
+                        <i>Create Course</i>
                       </Link>
                       <Link
                         to={`/dashbord/${Id}`}
                         className="flex leading-5 space-x-2 px-7 py-3   hover:text-white  hover:bg-sky-400"
                       >
                         <FaBook />
-                        <i>My learning</i>
+                        <i>My Course</i>
                       </Link>
                       <Link
                         onClick={handleLogout}
@@ -312,18 +302,11 @@ const Navbar = () => {
                         <FaHome /> <i>Profile</i>
                       </Link>
                       <Link
-                        to={`/dashbord/${Id}`}
+                        to={`/Dash`}
                         className="flex leading-5 space-x-2 px-7 py-3   hover:text-white  hover:bg-sky-400"
                       >
                         <MdDashboard />
                         <i>dashbord</i>
-                      </Link>
-                      <Link
-                        to={`/dashbord/${Id}`}
-                        className="flex leading-5 space-x-2 px-7 py-3   hover:text-white  hover:bg-sky-400"
-                      >
-                        <FaBook />
-                        <i>My learning</i>
                       </Link>
                       <Link
                         onClick={handleLogout}
@@ -420,6 +403,7 @@ const Navbar = () => {
               </div>
             )}
           </div>
+        </div>
         </div>
       </div>
     </nav>
