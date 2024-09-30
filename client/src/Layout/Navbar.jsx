@@ -185,7 +185,7 @@ const Navbar = () => {
                 >
                   My Account
                 </button>
-                <div className="absolute z-50 top-14 right-0 w-48 bg-white rounded-md shadow-md py-2">
+                <div className="absolute z-50 top-14 hidden right-0 w-48 bg-white rounded-md shadow-md py-2">
                   <Link
                     to="/register"
                     className="block px-7 py-3  hover:text-white  hover:bg-sky-400"
@@ -333,7 +333,7 @@ const Navbar = () => {
                 >
                   My Account
                 </button>
-                <div className="absolute z-50 top-14 right-0 w-48 bg-white rounded-md shadow-md py-2">
+                <div className="absolute hidden z-50 top-14 right-0 w-48 bg-white rounded-md shadow-md py-2">
                   <Link
                     to="/register"
                     className="block px-7 py-3  hover:text-white  hover:bg-sky-400"
