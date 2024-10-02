@@ -1,154 +1,135 @@
 import React, { useState } from "react";
 
 const Courses = () => {
-    const [IsCourse, setIsCourse] = useState(true);
 
-  const  handlaClick = () => {
+
+  const [IsCourse, setIsCourse] = useState(true);
+
+  const handlaClick = () => {
     setIsCourse(!IsCourse);
-    };
+  };
 
-const coursesData = [
-  {
-    title: "needed How To Become a Management Consultant",
-    price: "$15",
-    category: "Business",
-    instructor: "Smith",
-    videos: 1,
-    homepage: "Homepage",
-    status: "Approved",
-  },
-  {
-    title: "Marketing    success for your consultancy - build your brand",
-    price: "$15",
-    category: "Business",
-    instructor: "Smith",
-    videos: 1,
-    homepage: "Homepage",
-    status: "Approved",
-  },
-];
+  const coursesData = [
+    {
+      title: "needed How To Become a Management Consultant",
+      price: "$15",
+      category: "Business",
+      instructor: "Smith",
+      videos: 1,
+      homepage: "Homepage",
+      status: "Approved",
+    },
+    {
+      title: "Marketing    success for your consultancy - build your brand",
+      price: "$15",
+      category: "Business",
+      instructor: "Smith",
+      videos: 1,
+      homepage: "Homepage",
+      status: "Approved",
+    },
+  ];
 
-const newCoursesData = [
-  {
-    title: "How To Become a Management Consultant",
-    price: "$15",
-    category: "Business",
-    instructor: "Smith",
-    videos: 1,
-    homepage: "Homepage",
-    status: "Approved",
-  },
-  {
-    title: "Marketing success for your consultancy - build your brand",
-    price: "$15",
-    category: "Business",
-    instructor: "Smith",
-    videos: 1,
-    homepage: "Homepage",
-    status: "Approved",
-  },
-];
+  const newCoursesData = [
+    {
+      title: "How To Become a Management Consultant",
+      price: "$15",
+      category: "Business",
+      instructor: "Smith",
+      videos: 1,
+      homepage: "Homepage",
+      status: "Approved",
+    },
+    {
+      title: "Marketing success for your consultancy - build your brand",
+      price: "$15",
+      category: "Business",
+      instructor: "Smith",
+      videos: 1,
+      homepage: "Homepage",
+      status: "Approved",
+    },
+  ];
   return (
-    <div>
-      <div className="flex border-b border-slate-400 p-2 ">
-        <button className={`pl-10 cursor-pointer ${IsCourse ? 'text-sky-400' : ''}`} onClick={handlaClick}>Courses</button>
-        <button className={`pl-10 cursor-pointer ${!IsCourse ? 'text-sky-400' : ''}`} onClick={handlaClick}>New Arrival</button>
+    <div className="p-4">
+      <div className="flex space-x-4">
+        <h2 className={`cursor-pointer mb-4 ${
+            IsCourse ? "text-blue-500" : ""}`}onClick={handlaClick}>Courses</h2>
+        <h2 className={`cursor-pointer mb-4 ${
+          !IsCourse ? "text-blue-500" : ""}`}onClick={handlaClick}>New Arrival</h2>
       </div>
-      <div className="flex">
-        <table
-          border="1"
-          style={{
-            width: "100%",
-            textAlign: "left",
-            borderCollapse: "collapse",
-          }}
-        >
-          <thead className="border-b border-slate-400 py-6">
-            <tr>
-              <th>Title</th>
-              <th>Price</th>
-              <th>Category</th>
-              <th>Instructor</th>
-              <th>Videos</th>
-              <th>Homepage</th>
-              <th>Status</th>
+      {IsCourse ? (
+        <table className="min-w-full table-auto">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="px-4 py-2 text-left">Title</th>
+              <th className="px-4 py-2 text-left">Price</th>
+              <th className="px-4 py-2 text-left">Category</th>
+              <th className="px-4 py-2 text-left">Instructor</th>
+              <th className="px-4 py-2 text-left">Videos</th>
+              <th className="px-4 py-2 text-left">Homepage</th>
+              <th className="px-4 py-2 text-left">Status</th>
             </tr>
           </thead>
-          <tbody className="py-6">
-            {IsCourse
-              ? coursesData.map((course, index) => (
-                  <tr className="border-b border-slate-400 " key={index}>
-                    <td>{course.title}</td>
-                    <td>{course.price}</td>
-                    <td>{course.category}</td>
-                    <td>{course.instructor}</td>
-                    <td>{course.videos}</td>
-                    <td>
-                      <button
-                        style={{
-                          backgroundColor: "lightblue",
-                          padding: "5px 10px",
-                          borderRadius: "5px",
-                          cursor: "pointer",
-                        }}
-                      >
-                        {course.homepage}
-                      </button>
-                    </td>
-                    <td>
-                      <button
-                        style={{
-                          backgroundColor: "lightgreen",
-                          padding: "5px 10px",
-                          borderRadius: "5px",
-                          cursor: "pointer",
-                        }}
-                      >
-                        {course.status}
-                      </button>
-                    </td>
-                  </tr>
-                ))
-              : newCoursesData.map((course, index) => (
-                  <tr className="border-b border-slate-400 " key={index}>
-                    <td>{course.title}</td>
-                    <td>{course.price}</td>
-                    <td>{course.category}</td>
-                    <td>{course.instructor}</td>
-                    <td>{course.videos}</td>
-                    <td>
-                      <button
-                        style={{
-                          backgroundColor: "lightblue",
-                          padding: "5px 10px",
-                          borderRadius: "5px",
-                          cursor: "pointer",
-                        }}
-                      >
-                        {course.homepage}
-                      </button>
-                    </td>
-                    <td>
-                      <button
-                        style={{
-                          backgroundColor: "lightgreen",
-                          padding: "5px 10px",
-                          borderRadius: "5px",
-                          cursor: "pointer",
-                        }}
-                      >
-                        {course.status}
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+          <tbody>
+            {coursesData.map((request, index) => (
+              <tr key={index} className="border-b">
+                <td className="px-4 py-2">{request.title}</td>
+                <td className="px-4 py-2">{request.price}</td>
+                <td className="px-4 py-2">{request.category}</td>
+                <td className="px-4 py-2">{request.instructor}</td>
+                <td className="px-4 py-2">{request.videos}</td>
+                <td className="px-4 py-2">{request.homepage}</td>
+                <td className="px-4 py-2">
+                  <button className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-full mr-2">
+                    {request.status}
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
-      </div>  
+      ) : (
+        <table className="min-w-full table-auto">
+          <thead>
+          <tr className="bg-gray-100">
+              <th className="px-4 py-2 text-left">Title</th>
+              <th className="px-4 py-2 text-left">Price</th>
+              <th className="px-4 py-2 text-left">Category</th>
+              <th className="px-4 py-2 text-left">Instructor</th>
+              <th className="px-4 py-2 text-left">Videos</th>
+              <th className="px-4 py-2 text-left">Status</th>
+              <th className="px-4 py-2 text-left">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {newCoursesData.map((request, index) => (
+              <tr key={index} className="border-b">
+                <td className="px-4 py-2">{request.title}</td>
+                <td className="px-4 py-2">{request.price}</td>
+                <td className="px-4 py-2">{request.category}</td>
+                <td className="px-4 py-2">{request.instructor}</td>
+                <td className="px-4 py-2">{request.videos}</td>
+                <td className="px-4 py-2">
+                  <span className="bg-yellow-200 text-yellow-700 px-2 py-1 rounded-full text-sm">
+                    {request.status}
+                  </span>
+                </td>
+                <td className="px-4 py-2">
+                  <button className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-full mr-2">
+                    Approve Now
+                  </button>
+                  <button className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-full">
+                    Decline
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };
 
 export default Courses;
-
-
