@@ -1,8 +1,9 @@
 import React from "react";
+import Layout from "../../Layout/Layout";
 
 const CreateModule = () => {
   return (
-    <div className="h-screen w-full p-10 ">
+    <Layout className="h-screen w-full p-10 ">
       <div className="  p-10 pb-5">
         <h1 className=" text-center py-12 font-bold text-4xl">
           Create or Update Module
@@ -34,7 +35,7 @@ const CreateModule = () => {
           Save
         </button>
       </div>
-    </div>
+    </Layout>
   );
 };
 

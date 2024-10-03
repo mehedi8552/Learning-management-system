@@ -111,14 +111,14 @@ const Navbar = () => {
                           <FaHome /> <i>Profile</i>
                         </Link>
                         <Link
-                          to={`/dashbord/${Id}`}
+                          to={'/CreateCourse'}
                           className="flex leading-5 space-x-2 px-7 py-3   hover:text-white  hover:bg-sky-400"
                         >
                           <FaFolderPlus />
                           <i>Create Course</i>
                         </Link>
                         <Link
-                          to={`/dashbord/${Id}`}
+                          to={'/CreateCourseCard'}
                           className="flex leading-5 space-x-2 px-7 py-3   hover:text-white  hover:bg-sky-400"
                         >
                           <FaBook />

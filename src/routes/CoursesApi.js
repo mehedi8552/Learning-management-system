@@ -56,8 +56,8 @@ router.post(
   authorizeRole("manageCourse"),
   CourseController.DeleteCource
 );
-
-router.get("/ReadCourceById/:CourceID", CourseController.ReadCourceById);
+router.get("/ReadCourceById/:CourceID", CourseController.ReadCourceById);//by Course id
+router.get("/ReadCourceById/:InsID", CourseController.ReadCourceById);//by instractor id
 
 //Course Modules Management Endpoints---------------------------api
 

@@ -2,6 +2,7 @@ import React from "react";
 import CourseStore from "../../Store/CourseStore";
 import { jwtDecode } from "jwt-decode";
 import Cookies from 'js-cookie'
+import Layout from "../../Layout/Layout";
 const CreateCourse = () => {
 
  let {CourseData,CourseDataChange,CourseSaveRequest} = CourseStore();
@@ -18,16 +19,16 @@ const CreateCourse = () => {
 
 
   return (
-    <div className="h-screen w-full p-10 ">
+    <Layout className="h-screen w-full p-10 ">
       <div className="  p-10 pb-5">
-        <h1 className=" text-center py-12 font-bold text-4xl">Create Course</h1>
-        <div className=" grid md:grid-cols-4 grid-cols-1 gap-6">
+        <h1 className=" text-center py-12 font-bold text-4xl">Update Course</h1>
+        <div className=" grid md:grid-row-4 grid-row-1 gap-6 md:px-96 px-10">
         <div className="flex flex-col space-y-2">
             <label htmlFor="">Course Iamge</label>
             <input
               value={CourseData.image}
               onChange={(e)=>{CourseDataChange("image",e.target.value)}}
-              className="h-12 w-full py-2 border-gray-200 rounded-md"
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               type="file"
             />
           </div>
@@ -36,7 +37,7 @@ const CreateCourse = () => {
             <input
               value={CourseData.title}
               onChange={(e)=>{CourseDataChange("title",e.target.value)}}
-              className="h-12 w-full border border-gray-200 rounded-md"
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               type="text"
             />
           </div>
@@ -46,14 +47,14 @@ const CreateCourse = () => {
             <input
             value={CourseData.description}
             onChange={(e)=>{CourseDataChange("description",e.target.value)}}
-              className="h-12 w-full border border-gray-200 rounded-md"
+             className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               type="text"
             />
           </div>
           <div className="flex flex-col space-y-2">
             <label htmlFor="">Select Category</label>
             <select
-              className="h-12 w-full border border-gray-200 rounded-md"
+              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               onChange={(e)=>{CourseDataChange("Category",e.target.value)}}
             >
               <option value="">Select Category</option>
@@ -63,10 +64,17 @@ const CreateCourse = () => {
               <option value="engineering">Engineering</option>
             </select>
           </div>
+          <h1 className="py-2">
+              <button onClick={Save} className="px-4 py-2 bg-sky-400 hover:bg-green-600 rounded-md text-white">
+                Save
+              </button>
+            </h1>
         </div>
-        <button onClick={Save} className="py-4 px-8 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-md my-4">Save</button>
+
       </div>
-    </div>
+      <div>
+      </div>
+    </Layout>
   );
 };
 

@@ -49,7 +49,7 @@ const App = () => {
         {/* --------------------------------Admin Routes-------------------------------------- */}
 
         <Route
-          path="/CreateCourse"
+          path="/UpdateCourse/CourseID"
           element={
             <ProtectedRoute>
               <CreateCourse />
@@ -89,7 +89,7 @@ const App = () => {
           }
         />
         <Route
-          path="/UploadContentCard"
+          path="/UploadContentCard/ModuleID"
           element={
             <ProtectedRoute>
               <UploadContentCard />
@@ -97,7 +97,7 @@ const App = () => {
           }
         />
 
-        {/* ---------------------------------------------------------------------------------- */}
+        {/* ------------------------------------Super Admin Routes---------------------------------------------- */}
         <Route path="" element={<Dashboard />}>
         <Route path="/Dash" element={<Dash />} />
         <Route path="/courses" element={<Courses />} />
@@ -107,9 +107,6 @@ const App = () => {
         <Route path="testimonials" element={<Testimonials />} />
         <Route path="categories" element={<Categories />} />
         </Route>
-        {/* ------------------------------------------------------------------------------------ */}
-
-        {/* --------------------------------Super Admin Routes----------------------------------- */}
         <Route
           path="/Dashboard"
           element={
@@ -118,9 +115,7 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-
         {/* ------------------------------------------------------------------------------------- */}
-
         <Route
           path="/view-profile-by-id/:id"
           element={
@@ -129,6 +124,7 @@ const App = () => {
             </ProtectedRoute>
           }
         />
+        {/* -------------------------------Instractor Routes--------------------------------------------- */}
         <Route path="/CreateCourse/:insID" element={<CreatePosts />} />
         <Route path="/viewPosts" element={<ViewPosts />} />
         {/* <Route path="/viewAllUsers" element={<ProtectedRoute><ViewAllUsers /></ProtectedRoute>} /> */}
