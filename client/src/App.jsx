@@ -98,7 +98,7 @@ const App = () => {
         />
 
         {/* ------------------------------------Super Admin Routes---------------------------------------------- */}
-        <Route path="" element={<Dashboard />}>
+        <Route path="" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}>
         <Route path="/Dash" element={<Dash />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="instructors" element={<Instructors />} />

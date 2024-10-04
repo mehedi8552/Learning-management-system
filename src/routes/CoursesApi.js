@@ -23,12 +23,10 @@ router.post(
   authorizeRole("manageCourse"),
   upload.single("image"),
   async (req, res) => {
-    try {
-      if (!req.file) {
-        return res.status(400).send("No file uploaded");
-      }
+    try {    
+
       const data = new Course({
-        image: req.file.buffer.toString("base64"),
+        image: req.file?.buffer.toString("base64"),
         title: req.body.title,
         description: req.body.description,
         instructorID: req.params.instructorID,

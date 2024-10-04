@@ -14,11 +14,16 @@ const CourseStore = create((set) => ({
   },
   CourseSaveRequest: async (id, postBody) => {
     try {
+      console.log(postBody);
+      
       const res = await axios.post(
         `http://localhost:3000/courses/createCource/${id}`,
         postBody,
         {
           withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
       return res.data["status"] === "success";
