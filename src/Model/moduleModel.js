@@ -1,25 +1,28 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 // Define the Module schema
-const moduleSchema = new Schema({
-
-  CourceID: {
-    type: Schema.Types.ObjectId,
-    required: true,
+const moduleSchema = new Schema(
+  {
+    image: {
+      type: String,
+    },
+    CourceID: {
+      type: Schema.Types.ObjectId,
+      ref: "Course",
+    },
+    title: {
+      type: String,
+    },
+    description: {
+      type: String,
+    },
   },
-  title: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
+  {
+    timestamps: true,
   }
-}, {
-  timestamps: true
-});
+);
 
-const Module = mongoose.model('Module', moduleSchema);
+const Module = mongoose.model("Module", moduleSchema);
 
 module.exports = Module;

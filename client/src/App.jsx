@@ -16,8 +16,8 @@ import LoginPage from "./Page/LoginPage";
 import BookPage from "./Page/BookPage";
 import AUpdateCourse from "./Components/Admin/AUpdateCourse";
 import CreateCourseCard from "./Components/Admin/ACreateCourseCard";
-import CreateModule from "./Components/Admin/CreateModule";
-import CreateModuleCard from "./Components/Admin/CreateModuleCard";
+import UpdateModule from "./Components/Admin/BUpdateModule";
+import CreateModuleCard from "./Components/Admin/BCreateModuleCard";
 import UploadContent from "./Components/Admin/UploadContent";
 import UploadContentCard from "./Components/Admin/UploadContentCard";
 
@@ -65,15 +65,15 @@ const App = () => {
           }
         />
         <Route
-          path="/CreateModule"
+          path="/UpdateModule/:ModuleID"
           element={
             <ProtectedRoute>
-              <CreateModule />
+              <UpdateModule />
             </ProtectedRoute>
           }
         />
         <Route
-          path="/CreateModuleCard"
+          path="/CreateModuleCard/:CourseID"
           element={
             <ProtectedRoute>
               <CreateModuleCard />

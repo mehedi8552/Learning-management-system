@@ -17,8 +17,7 @@ router.get("/", (req, res) => {
 // );
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
-router.post(
-  "/createCource/:instructorID",
+router.post("/createCource/:instructorID",
   authenticateToken,
   authorizeRole("manageCourse"),
   upload.single("image"),
@@ -42,17 +41,14 @@ router.post(
     }
   }
 );
-
-router.post(
-  "/UpdateCource/:CourceID",
+router.post("/UpdateCource/:CourceID",
   authenticateToken,
   authorizeRole("manageCourse"),
   CourseController.UpdateCource
 );
 router.get("/ReadAllCource", CourseController.ReadAllCource);
 
-router.post(
-  "/DeleteCource/:CourceID",
+router.post("/DeleteCource/:CourceID",
   authenticateToken,
   authorizeRole("manageCourse"),
   CourseController.DeleteCource
@@ -63,32 +59,28 @@ router.get("/ReadCourceByInsId/:InsID", CourseController.ReadCourceByinsID);//by
 
 //Course Modules Management Endpoints---------------------------api
 
-router.post(
-  "/CreateModule",
+router.post("/CreateModule/:CourceID",
   authenticateToken,
   authorizeRole("manageCourse"),
   CourseController.CreateModule
 );
-router.post(
-  "/UpdateModule/:ModuleID",
+router.post("/UpdateModule/:ModuleID",
   authenticateToken,
   authorizeRole("manageCourse"),
   CourseController.UpdateModule
 );
-router.post(
-  "/DeleteModule/:ModuleID",
+router.post("/DeleteModule/:ModuleID",
   authenticateToken,
   authorizeRole("manageCourse"),
   CourseController.DeleteModule
 );
-router.get("/ReadModuleById/:ModuleID", CourseController.ReadModuleById);
+router.get("/ReadModuleByCourseId/:CourceID", CourseController.ReadModuleById);
+
+// router.get("/ReadModuleByModuleId/:ModuleID", CourseController.ReadModuleById);
+
 router.get("/ReadAllModule", CourseController.ReadAllModule);
-router.get(
-  "/ReadCourceByinsID/:InsID",
-  authenticateToken,
-  authorizeRole("manageCourse"),
-  CourseController.ReadCourceByinsID
-);
+
+
 
 // Content Section---------------------------api
 

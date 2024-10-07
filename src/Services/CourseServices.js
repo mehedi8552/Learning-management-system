@@ -8,28 +8,6 @@ const ObjectId = mongoose.Types.ObjectId;
 
 
 
-const CreateCourceService = async (req, res) => {
-  try {
-    const { title, description, category } = req.body;
-    // Convert the image to base64
-    const imageBase64 = Buffer.from(req.file.buffer).toString('base64');
-    const newData = new Course({
-      title,
-      image: imageBase64,
-      description,
-      category
-    });
-
-   let ViewData = await newData.save();
-    return {
-      status: "success",
-      data: ViewData,
-    };
-  } catch (e) {
-    return { status: "Faild", message: e.toString() };
-  }
-};
-
 const ReadAllCourceService = async (req, res) => {
   try {
     const CourseData = await Course.find();
@@ -96,10 +74,12 @@ const DeleteCourceService = async (req, res) => {
 // Course Modules Management Endpoints:
 const CreateModuleService = async (req, res) => {
   try {
-    const { title, description, CourceID } = req.body;
+    let CourceID = new ObjectId(req.params.CourceID);
+    
+    const {image, title, description } = req.body;
     const ModuleData = new Module({
       title,
-      image:req.file.buffer.toString("base64"),
+      image,
       description,
       CourceID,
     });
@@ -109,12 +89,12 @@ const CreateModuleService = async (req, res) => {
     return {
       status: "success",
       data: newModule,
+      
     };
   } catch (e) {
     return { status: "Faild", message: e.toString() };
   }
 };
-
 const ReadCourceByinsIDService = async (req, res) => {
   try {
     let InsID = new ObjectId(req.params.InsID);
@@ -157,8 +137,8 @@ const DeleteModuleService = async (req, res) => {
 
 const ReadModuleByIdService = async (req, res) => {
   try {
-    let ModuleID = new ObjectId(req.params.ModuleID);
-    let ReadByIdData = await Module.find({ _id: ModuleID });
+    let CourseID = new ObjectId(req.params.CourceID);
+    let ReadByIdData = await Module.find({ CourceID: CourseID });
     return {
       status: "success",
       data: ReadByIdData,
@@ -282,14 +262,15 @@ const SearchByRemarkService = async (req) => {
 };
 
 module.exports = {
-  CreateCourceService,
+
   ReadAllCourceService,
+  ReadCourceByinsIDService,
   ReadCourceByIdService,
   DeleteCourceService,
   UpdateCourceService,
 
   CreateModuleService,
-  ReadCourceByinsIDService,
+
   UpdateModuleService,
   DeleteModuleService,
   ReadModuleByIdService,

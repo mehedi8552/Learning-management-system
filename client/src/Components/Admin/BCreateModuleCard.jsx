@@ -1,59 +1,55 @@
 import React, { useEffect, useState } from "react";
-import CourseStore from "../../Store/CourseStore";
-import { jwtDecode } from "jwt-decode";
-import Cookies from "js-cookie";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Layout from "../../Layout/Layout";
-const Module = () => {
+import ModuleStore from "../../Store/ModuleStore";
+const ModuleCard = () => {
+  let { CourseID } = useParams();
   let {
-    CourseData,
-    CourseDataChange,
-    CourseSaveRequest,
-    CourseReadRequest,
-    ReadCourseData,
-    DeleteCourseRequest,
-  } = CourseStore();
-
-  const token = Cookies.get("token");
-  const decoded = jwtDecode(token);
-  let id = decoded._id;
+    ModuleData,
+    ModuleDataChange,
+    ModuleSaveRequest,
+    ModuleReadRequest,
+    ReadModuleData,
+    DeleteModuleRequest,
+  } = ModuleStore();
 
   useEffect(() => {
     (async () => {
-      await CourseReadRequest(id);
+      await ModuleReadRequest(CourseID);
     })();
-  }, [id]);
+  }, []);
 
   const Save = async () => {
-    const res = await CourseSaveRequest(id, CourseData);
-    console.log(res);
+   let res = await ModuleSaveRequest(CourseID, ModuleData);
     if (res) {
       window.location.reload();
     }
   };
 
-  const DeleteCourse = async (courseId) => {
-    if (confirm("Are you sure you want to delete this course?")) {
+  const DeleteModule = async (ModuleId) => {
+    if (confirm("Are you sure you want to delete this Module?")) {
       try {
-        const res = await DeleteCourseRequest(courseId);
+        const res = await DeleteModuleRequest(ModuleId);
         if (res) {
           window.location.reload();
         } else {
-          console.error("Failed to delete course");
+          console.error("Failed to delete Module");
         }
       } catch (error) {
-        console.error("Error deleting course:", error);
+        console.error("Error deleting Module:", error);
       }
     }
   };
+
   const [IsTestimonial, setIsTestimonial] = useState(true);
   const HandleOnClick = () => {
     setIsTestimonial(!IsTestimonial);
   };
+
   return (
     <Layout>
       <div className="p-4 px-60 py-20">
-        <h1 className="text-center font-bold text-3xl">Manage My Course</h1>
+        <h1 className="text-center font-bold text-3xl">Manage My Module</h1>
         <div className="flex space-x-4">
           <h2
             className={`cursor-pointer mb-4 ${
@@ -61,7 +57,7 @@ const Module = () => {
             }`}
             onClick={HandleOnClick}
           >
-            My Course
+            My Module
           </h2>
           <h2
             className={`cursor-pointer mb-4 ${
@@ -69,22 +65,21 @@ const Module = () => {
             }`}
             onClick={HandleOnClick}
           >
-            Create Course
+            Create Module
           </h2>
         </div>
         {IsTestimonial ? (
-          <table className="table-fixed">
+          <table className="min-w-full table-auto">
             <thead>
               <tr className="bg-gray-100">
                 <th className="px-4 py-2 text-left">Image</th>
                 <th className="px-4 py-2 text-left">Title</th>
-                <th className="px-4 py-2 text-left">Category</th>
                 <th className="px-4 py-2 text-left">Description</th>
                 <th className="px-4 py-2 text-left">Action</th>
               </tr>
             </thead>
             <tbody>
-              {ReadCourseData.map((request, index) => (
+              {ReadModuleData.map((request, index) => (
                 <tr key={index} className="border-b">
                   <td className="px-4 py-2">
                     <img
@@ -94,24 +89,20 @@ const Module = () => {
                       srcset=""
                     />
                   </td>
-                  <td className="px-4 py-2 max-w-96">{request.title}</td>
-                  <td className="px-4 py-2">{request.Category}</td>
+                  <td className="px-4 py-2">{request.title}</td>
                   <td className="px-4 py-2">
                     <textarea>{request.description}</textarea>
                   </td>
                   <td className="px-4 py-2">
-                    <button
-                      onClick={() => DeleteCourse(request._id)}
-                      className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md  mr-2"
-                    >
+                    <button onClick={() => DeleteModule(request._id)} className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md  mr-2">
                       Delete
                     </button>
-                    <Link to={`/UpdateCourse/${request._id}`}>
+                    <Link to={`/UpdateModule/${request._id}`}>
                       <button className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md  mr-2">
                         Update
                       </button>
                     </Link>
-                    <Link to={`/CreateModuleCard/${request._id}`}>
+                    <Link to={"/UploadContentCard/ModuleID"}>
                       <button className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md  mr-2">
                         Open
                       </button>
@@ -125,49 +116,31 @@ const Module = () => {
           <div className=" flex flex-col space-y-2">
             <h1>
               <input
-                id="image"
-                name="image"
-                type="file"
                 className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                onChange={(e) => CourseDataChange("image", e.target.files[0])}
-                placeholder="Choose file"
+                type="text"
+                placeholder="Image"
+                value={ModuleData?.image}
+                onChange={(e) => ModuleDataChange("image", e.target.value)}
               />
             </h1>
             <h1>
               <input
-                value={CourseData.title}
-                onChange={(e) => {
-                  CourseDataChange("title", e.target.value);
-                }}
                 className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 type="text"
                 placeholder="Title"
+                value={ModuleData?.title}
+                onChange={(e) => ModuleDataChange("title", e.target.value)}
               />
             </h1>
-            <select
-              className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-              name=""
-              id=""
-              onChange={(e) => {
-                CourseDataChange("Category", e.target.value);
-              }}
-            >
-              <option value="">Chose one</option>
-              <option value="Business">Business</option>
-              <option value="Web design">Web design</option>
-              <option value="mern stack development">
-                mern stack development
-              </option>
-            </select>
             <h1>
               <textarea
                 className="resize bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full h-60 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 type="text"
                 placeholder="Description"
-                value={CourseData.description}
-                onChange={(e) => {
-                  CourseDataChange("description", e.target.value);
-                }}
+                value={ModuleData?.description}
+                onChange={(e) =>
+                  ModuleDataChange("description", e.target.value)
+                }
               />
             </h1>
             <h1 className="">
@@ -185,4 +158,4 @@ const Module = () => {
   );
 };
 
-export default Module;
+export default ModuleCard;

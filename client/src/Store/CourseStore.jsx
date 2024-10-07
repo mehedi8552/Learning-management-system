@@ -1,7 +1,5 @@
 import { create } from "zustand";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
-// import Cookies from "js-cookie";
 const CourseStore = create((set) => ({
   CourseData: { title: "", image: "", description: "", Category: "" },
   CourseDataChange: (name, value) => {
@@ -32,7 +30,6 @@ const CourseStore = create((set) => ({
       throw e;
     }
   },
-
   ReadCourseData: [],
   CourseReadRequest: async (id) => {
     const res = await axios.get(

@@ -1,5 +1,5 @@
 const {
-  CreateCourceService,
+  // CreateCourceService,
   ReadAllCourceService,
    ReadCourceByIdService,
    DeleteCourceService,
@@ -24,10 +24,10 @@ const {
 
 } = require("../Services/CourseServices");
 
-exports.CreateCource = async (req, res) => {
-  let result = await CreateCourceService(req);
-  res.status(200).json(result);
-};
+// exports.CreateCource = async (req, res) => {
+//   let result = await CreateCourceService(req);
+//   res.status(200).json(result);
+// };
 exports.ReadAllCource = async (req, res) => {
   let result = await ReadAllCourceService(req);
   res.status(200).json(result);
