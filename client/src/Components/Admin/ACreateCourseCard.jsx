@@ -1,56 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CourseStore from "../../Store/CourseStore";
 import { jwtDecode } from "jwt-decode";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 import Layout from "../../Layout/Layout";
 const Module = () => {
-  let { CourseData, CourseDataChange, CourseSaveRequest } = CourseStore();
-
+  let {
+    CourseData,
+    CourseDataChange,
+    CourseSaveRequest,
+    CourseReadRequest,
+    ReadCourseData,
+  } = CourseStore();
   const token = Cookies.get("token");
-
   const decoded = jwtDecode(token);
   let id = decoded._id;
 
+  useEffect(() => {
+    (async () => {
+      await CourseReadRequest(id);
+    })();
+  }, [id]);
   const Save = async () => {
     await CourseSaveRequest(id, CourseData);
-
+    window.location.reload();
     if (res) {
       alert("Course Update Success");
     }
   };
+  let CourseID = ReadCourseData?._id;
+console.log(ReadCourseData);
 
+  const DeleteCourse = async () => {
+    let res = await DeleteCourseRequest(CourseID);
+    if (res) {
+      window.location.reload();
+    }
+  };
   const [IsTestimonial, setIsTestimonial] = useState(true);
   const HandleOnClick = () => {
     setIsTestimonial(!IsTestimonial);
   };
-  const CourseDatas = [
-    {
-      _id: 0,
-      image:
-        "https://media.istockphoto.com/id/485371557/photo/twilight-at-spirit-island.jpg?s=612x612&w=0&k=20&c=FSGliJ4EKFP70Yjpzso0HfRR4WwflC6GKfl4F3Hj7fk=", // Replace with actual image paths
-      title: "একশব্দে কুরআন শিক্ষা",
-      des: "আমরা আপনাদের জন্য নিয়ে এসেছি বাছাইকৃত স্টাইলিশ ক্যাপশন বাংলা। আমরা ফেসবুক স্ট্যাটাস দেওয়ার সময় বিভিন্ন ক্যাপশন লিখে পোস্ট করে থাকি। অনেক সময় আমরা ফেসবুকে কি লিখে ক্যাপশন দিব তা খুঁজে পাই না। ",
-      catagory: "কুরআন শিক্ষা",
-    },
-    {
-      _id: 0,
-      image:
-        "https://media.istockphoto.com/id/485371557/photo/twilight-at-spirit-island.jpg?s=612x612&w=0&k=20&c=FSGliJ4EKFP70Yjpzso0HfRR4WwflC6GKfl4F3Hj7fk=", // Replace with actual image paths
-      title: "অনলাইনে কুরআন শিক্ষা কোর্স (পুরুষ)",
-      des: "আমরা আপনাদের জন্য নিয়ে এসেছি বাছাইকৃত স্টাইলিশ ক্যাপশন বাংলা। আমরা ফেসবুক স্ট্যাটাস দেওয়ার সময় বিভিন্ন ক্যাপশন লিখে পোস্ট করে থাকি। অনেক সময় আমরা ফেসবুকে কি লিখে ক্যাপশন দিব তা খুঁজে পাই না। ",
-      catagory: "কুরআন শিক্ষা",
-    },
-    {
-      _id: 0,
-      image:
-        "https://media.istockphoto.com/id/485371557/photo/twilight-at-spirit-island.jpg?s=612x612&w=0&k=20&c=FSGliJ4EKFP70Yjpzso0HfRR4WwflC6GKfl4F3Hj7fk=", // Replace with actual image paths
-      title: "অনলাইনে কুরআন শিক্ষা কোর্স (মহিলা)",
-      des: "আমরা আপনাদের জন্য নিয়ে এসেছি বাছাইকৃত স্টাইলিশ ক্যাপশন বাংলা। আমরা ফেসবুক স্ট্যাটাস দেওয়ার সময় বিভিন্ন ক্যাপশন লিখে পোস্ট করে থাকি। অনেক সময় আমরা ফেসবুকে কি লিখে ক্যাপশন দিব তা খুঁজে পাই না। ",
-      catagory: "কুরআন শিক্ষা",
-    },
-  ];
-
   return (
     <Layout>
       <div className="p-4 px-60 py-20">
@@ -74,7 +64,7 @@ const Module = () => {
           </h2>
         </div>
         {IsTestimonial ? (
-          <table className="min-w-full table-auto">
+          <table className="table-fixed">
             <thead>
               <tr className="bg-gray-100">
                 <th className="px-4 py-2 text-left">Image</th>
@@ -85,7 +75,7 @@ const Module = () => {
               </tr>
             </thead>
             <tbody>
-              {CourseDatas.map((request, index) => (
+              {ReadCourseData.map((request, index) => (
                 <tr key={index} className="border-b">
                   <td className="px-4 py-2">
                     <img
@@ -95,16 +85,16 @@ const Module = () => {
                       srcset=""
                     />
                   </td>
-                  <td className="px-4 py-2">{request.title}</td>
-                  <td className="px-4 py-2">{request.catagory}</td>
+                  <td className="px-4 py-2 max-w-96">{request.title}</td>
+                  <td className="px-4 py-2">{request.Category}</td>
                   <td className="px-4 py-2">
-                    <textarea>{request.des}</textarea>
+                    <textarea>{request.description}</textarea>
                   </td>
                   <td className="px-4 py-2">
-                    <button className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md  mr-2">
-                      Delete
-                    </button>
-                    <Link to={"/UpdateCourse/CourseID"}>
+                      <button onClick={DeleteCourse} className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md  mr-2">
+                        Delete
+                      </button>
+                    <Link to={`/UpdateCourse/${request._id}`}>
                       <button className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md  mr-2">
                         Update
                       </button>

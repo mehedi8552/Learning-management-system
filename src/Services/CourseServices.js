@@ -47,7 +47,12 @@ const UpdateCourceService = async (req, res) => {
   try {
     let CourceID = new ObjectId(req.params.CourceID);
     let reqbody = req.body;
-    let data = await Course.findByIdAndUpdate(CourceID, reqbody);
+    let data = await Course.findOneAndUpdate(
+      CourceID,
+      reqbody,
+      {
+        returnOriginal: false
+      });
     return {
       status: "success",
       data: data,

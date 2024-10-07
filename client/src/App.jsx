@@ -14,8 +14,8 @@ import ContactUsPage from "./Page/ContactUsPage";
 import CourseDetailsPage from "./Page/CourseDetailsPage";
 import LoginPage from "./Page/LoginPage";
 import BookPage from "./Page/BookPage";
-import CreateCourse from "./Components/Admin/CreateCourse";
-import CreateCourseCard from "./Components/Admin/CreateCourseCard";
+import AUpdateCourse from "./Components/Admin/AUpdateCourse";
+import CreateCourseCard from "./Components/Admin/ACreateCourseCard";
 import CreateModule from "./Components/Admin/CreateModule";
 import CreateModuleCard from "./Components/Admin/CreateModuleCard";
 import UploadContent from "./Components/Admin/UploadContent";
@@ -49,10 +49,10 @@ const App = () => {
         {/* --------------------------------Admin Routes-------------------------------------- */}
 
         <Route
-          path="/UpdateCourse/CourseID"
+          path="/UpdateCourse/:CourseID"
           element={
             <ProtectedRoute>
-              <CreateCourse />
+              <AUpdateCourse />
             </ProtectedRoute>
           }
         />

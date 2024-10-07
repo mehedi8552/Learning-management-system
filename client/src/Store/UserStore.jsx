@@ -46,7 +46,7 @@ const UserStore = create((set) => ({
         {
           withCredentials: true,
         }
-      );
+      );  
       return res.data["status"] === "success";
     } catch (e) {
       if (e.response.status === 401) {
@@ -55,14 +55,7 @@ const UserStore = create((set) => ({
       throw e;
     }
   },
-  // -------------------------------Create Course--------------------------------
-
-  CourseData:{
-    
-  }
-
-
-
+  
 }));
 
 export default UserStore;

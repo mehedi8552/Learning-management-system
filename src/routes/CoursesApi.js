@@ -55,7 +55,8 @@ router.post(
   CourseController.DeleteCource
 );
 router.get("/ReadCourceById/:CourceID", CourseController.ReadCourceById);//by Course id
-router.get("/ReadCourceById/:InsID", CourseController.ReadCourceById);//by instractor id
+
+router.get("/ReadCourceByInsId/:InsID", CourseController.ReadCourceByinsID);//by instractor id
 
 //Course Modules Management Endpoints---------------------------api
 
