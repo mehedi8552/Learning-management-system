@@ -20,11 +20,10 @@ const CreateCourceService = async (req, res) => {
       category
     });
 
-    await newData.save();
+   let ViewData = await newData.save();
     return {
       status: "success",
-      data: newData,
-      message:"File uploaded successfully"
+      data: ViewData,
     };
   } catch (e) {
     return { status: "Faild", message: e.toString() };

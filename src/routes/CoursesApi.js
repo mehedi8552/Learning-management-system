@@ -32,8 +32,11 @@ router.post(
         instructorID: req.params.instructorID,
         Category: req.body.Category,
       });
-      await data.save();
-      res.send("File uploaded successfully");
+     let Viewdata = await data.save();
+      return {
+        status: "success",
+        data: Viewdata,
+      };
     } catch (error) {
       res.status(500).send(error.message);
     }

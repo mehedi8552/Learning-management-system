@@ -11,7 +11,9 @@ const Module = () => {
     CourseSaveRequest,
     CourseReadRequest,
     ReadCourseData,
+    DeleteCourseRequest,
   } = CourseStore();
+
   const token = Cookies.get("token");
   const decoded = jwtDecode(token);
   let id = decoded._id;
@@ -21,20 +23,27 @@ const Module = () => {
       await CourseReadRequest(id);
     })();
   }, [id]);
-  const Save = async () => {
-    await CourseSaveRequest(id, CourseData);
-    window.location.reload();
-    if (res) {
-      alert("Course Update Success");
-    }
-  };
-  let CourseID = ReadCourseData?._id;
-console.log(ReadCourseData);
 
-  const DeleteCourse = async () => {
-    let res = await DeleteCourseRequest(CourseID);
+  const Save = async () => {
+    const res = await CourseSaveRequest(id, CourseData);
+    console.log(res);
     if (res) {
       window.location.reload();
+    }
+  };
+
+  const DeleteCourse = async (courseId) => {
+    if (confirm("Are you sure you want to delete this course?")) {
+      try {
+        const res = await DeleteCourseRequest(courseId);
+        if (res) {
+          window.location.reload();
+        } else {
+          console.error("Failed to delete course");
+        }
+      } catch (error) {
+        console.error("Error deleting course:", error);
+      }
     }
   };
   const [IsTestimonial, setIsTestimonial] = useState(true);
@@ -91,9 +100,12 @@ console.log(ReadCourseData);
                     <textarea>{request.description}</textarea>
                   </td>
                   <td className="px-4 py-2">
-                      <button onClick={DeleteCourse} className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md  mr-2">
-                        Delete
-                      </button>
+                    <button
+                      onClick={() => DeleteCourse(request._id)}
+                      className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md  mr-2"
+                    >
+                      Delete
+                    </button>
                     <Link to={`/UpdateCourse/${request._id}`}>
                       <button className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md  mr-2">
                         Update

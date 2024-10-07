@@ -14,8 +14,6 @@ const CourseStore = create((set) => ({
   },
   CourseSaveRequest: async (id, postBody) => {
     try {
-      console.log(postBody);
-
       const res = await axios.post(
         `http://localhost:3000/courses/createCource/${id}`,
         postBody,
@@ -85,12 +83,13 @@ const CourseStore = create((set) => ({
   },
   DeleteCourseRequest: async (id) => {
     try {
-      const res = await axios.delete(
+      const res = await axios.post(
         `http://localhost:3000/courses/DeleteCource/${id}`,
+        null,
         {
           withCredentials: true,
         }
-      );
+      );  
       return res.data["status"] === "success";
     } catch (e) {
       if (e.response.status === 401) {
