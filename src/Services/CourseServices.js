@@ -208,7 +208,11 @@ const UpdateFileService = async (req, res) => {
   try {
     let ContentID = new ObjectId(req.params.ContentID);
     let reqbody = req.body;
-    let data = await Content.findByIdAndUpdate({ _id: ContentID }, reqbody);
+    let data = await Content.findByIdAndUpdate(
+      ContentID,
+      { $set: reqbody },
+      { returnDocument: "after" }
+    );
     return {
       status: "success",
       data: data,

@@ -79,12 +79,13 @@ exports.CreateFile = async (req, res) => {
   let result = await CreateFileService(req);
   res.status(200).json(result);
 };
-exports.UpdateFile = async (req, res) => {
-  let result = await UpdateFileService(req);
-  res.status(200).json(result);
-};
+
 exports.DeleteFile = async (req, res) => {
   let result = await DeleteFileService(req);
+  res.status(200).json(result);
+};
+exports.UpdateFile = async (req, res) => {
+  let result = await UpdateFileService(req);
   res.status(200).json(result);
 };
 exports.ReadByFileId = async (req, res) => {

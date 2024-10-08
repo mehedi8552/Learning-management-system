@@ -96,6 +96,12 @@ router.post(
   authorizeRole("manageCourse"),
   CourseController.DeleteFile
 );
+router.post(
+  "/UpdateFile/:ContentID",
+  authenticateToken,
+  authorizeRole("manageCourse"),
+  CourseController.UpdateFile
+);
 router.get("/ReadByFileId/:ContentID", CourseController.ReadByFileId);
 router.get("/ReadByModuleId/:ModuleId", CourseController.ReadByModuleId);
 router.get("/ReadAllFile", CourseController.ReadAllFile);
