@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import Layout from "../../Layout/Layout";
 import ContentStore from "../../Store/ContentStore";
 const UploadContentCard = () => {
-  const { ReadContentData,ContentReadRequest,ContectSaveRequest,ContentData,ContentDataChange} = ContentStore();
+  const { ReadContentData,ContentReadRequest,ContectSaveRequest,ContentData,ContentDataChange,DeleteContentRequest} = ContentStore();
   let { ModuleID } = useParams();  
   useEffect(() => {
     ContentReadRequest(ModuleID);
@@ -19,6 +19,20 @@ const UploadContentCard = () => {
     setIsTestimonial(!IsTestimonial);
   };
 
+  const DeleteContent = async (ContentId) => {
+    // if (confirm("Are you sure you want to delete this Module?")) {
+      try {
+        const res = await DeleteContentRequest(ContentId);
+        if (res) {
+          window.location.reload();
+        } else {
+          console.error("Failed to delete Module");
+        }
+      } catch (error) {
+        console.error("Error deleting Module:", error);
+      }
+    // }
+  };
     return (
       <Layout>
       <div className="p-4 px-60 py-20">
@@ -67,7 +81,7 @@ const UploadContentCard = () => {
                   <td className="px-4 py-2">{request.title}</td>
                   <td className="px-4 py-2 "><iframe className="h-40" src={request.UR}></iframe></td>
                   <td className="px-4 py-2">
-                    <button className="bg-red-400 hover:bg-red-500 text-white px-3 py-1 rounded-md  mr-2">
+                    <button onClick={() => DeleteContent(request._id)} className="bg-red-400 hover:bg-red-500 text-white px-3 py-1 rounded-md  mr-2">
                       Delete
                     </button>
                     <Link to={`/UpdateContent/${request._id}`}><button className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md  mr-2">
@@ -108,7 +122,10 @@ const UploadContentCard = () => {
               />
             </h1>
             <h1 className="">
-              <button onClick={Save} className="px-4 py-2 bg-sky-400 hover:bg-green-600 rounded-md text-white">
+              <button onClick={(e) => {
+                Save();
+                e.currentTarget.disabled = true;
+              }} className="px-4 py-2 bg-sky-400 hover:bg-green-600 rounded-md text-white">
                 Save
               </button>
             </h1>

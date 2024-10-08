@@ -41,7 +41,7 @@ const ContentStore = create((set) => ({
   },
   ContentData: null,
   ReadByContentID: async (id) => {
-    try {   
+    try {
       const res = await axios.get(
         `http://localhost:3000/courses/ReadByFileId/${id}`,
         {
@@ -57,8 +57,6 @@ const ContentStore = create((set) => ({
   },
   UpdateContentRequest: async (id, postBody) => {
     try {
-      console.log(id,postBody);
-      
       const res = await axios.post(
         `http://localhost:3000/courses/UpdateFile/${id}`,
         postBody,
@@ -73,7 +71,21 @@ const ContentStore = create((set) => ({
       }
       throw e;
     }
-  }
+  },
+  DeleteContentRequest: async (id) => {
+    try {
+      let res = await axios.post(
+        `http://localhost:3000/courses/DeleteFile/${id}`,
+        null,
+        {
+          withCredentials: true,
+        }
+      );
+      return res.data["status"] === "success";
+    } catch (e) {
+      console.log(e);
+    }
+  },
 }));
 
 export default ContentStore;
