@@ -16,7 +16,8 @@ const {
   CreateFileService,
   UpdateFileService,
   DeleteFileService,
-  ReadFileByIdService,
+  ReadByFileIdService,
+  ReadByModuleIdService,
   ReadAllFileService,
 
   SearchByRemarkService,
@@ -86,8 +87,12 @@ exports.DeleteFile = async (req, res) => {
   let result = await DeleteFileService(req);
   res.status(200).json(result);
 };
-exports.ReadFileById = async (req, res) => {
-  let result = await ReadFileByIdService(req);
+exports.ReadByFileId = async (req, res) => {
+  let result = await ReadByFileIdService(req);
+  res.status(200).json(result);
+};
+exports.ReadByModuleId = async (req, res) => {
+  let result = await ReadByModuleIdService(req);
   res.status(200).json(result);
 };
 exports.ReadAllFile = async (req, res) => {

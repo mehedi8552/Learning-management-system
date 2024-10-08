@@ -18,7 +18,7 @@ import AUpdateCourse from "./Components/Admin/AUpdateCourse";
 import CreateCourseCard from "./Components/Admin/ACreateCourseCard";
 import UpdateModule from "./Components/Admin/BUpdateModule";
 import CreateModuleCard from "./Components/Admin/BCreateModuleCard";
-import UploadContent from "./Components/Admin/UploadContent";
+import UpdateContent from "./Components/Admin/UpdateContent";
 import UploadContentCard from "./Components/Admin/UploadContentCard";
 
 import Dash from "./Components/SuperAdmin/Dash";
@@ -81,15 +81,15 @@ const App = () => {
           }
         />
         <Route
-          path="/UploadContent"
+          path="/UpdateContent/:ContentID"
           element={
             <ProtectedRoute>
-              <UploadContent />
+              <UpdateContent />
             </ProtectedRoute>
           }
         />
         <Route
-          path="/UploadContentCard/ModuleID"
+          path="/UploadContentCard/:ModuleID"
           element={
             <ProtectedRoute>
               <UploadContentCard />

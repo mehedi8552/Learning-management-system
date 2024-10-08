@@ -3,19 +3,17 @@ const { Schema } = mongoose;
 
 const contentSchema = new Schema(
   {
-    moduleID: {
+    ModuleID: {
       type: Schema.Types.ObjectId,
-      ref: "Module", 
     },
-    UserID: {
-      type: Schema.Types.ObjectId,
-      ref: "Module", 
+    image: {
+      type: String,
     },
     title: {
       type: String,
       default: "",
     },
-    url: {
+    URL: {
       type: String,
       default: "",
     },

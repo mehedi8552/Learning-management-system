@@ -85,7 +85,7 @@ router.get("/ReadAllModule", CourseController.ReadAllModule);
 // Content Section---------------------------api
 
 router.post(
-  "/CreateFile",
+  "/CreateFile/:ModuleID",
   authenticateToken,
   authorizeRole("manageCourse"),
   CourseController.CreateFile
@@ -96,7 +96,8 @@ router.post(
   authorizeRole("manageCourse"),
   CourseController.DeleteFile
 );
-router.get("/ReadFileById/:ContentID", CourseController.ReadFileById);
+router.get("/ReadByFileId/:ContentID", CourseController.ReadByFileId);
+router.get("/ReadByModuleId/:ModuleId", CourseController.ReadByModuleId);
 router.get("/ReadAllFile", CourseController.ReadAllFile);
 
 // Filtering---------------------------api

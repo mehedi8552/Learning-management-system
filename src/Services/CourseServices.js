@@ -187,10 +187,15 @@ const ReadAllModuleService = async (req, res) => {
 
 const CreateFileService = async (req, res) => {
   try {
-    const reqbody = req.body;
-
-    const course = new Content(reqbody);
-    const data = await course.save();
+    const ModuleID = new ObjectId(req.params.ModuleID);
+    const {image, title, URL } = req.body;
+    const ContentData = new Content({
+      title,
+      image,
+      URL,
+      ModuleID,
+    });
+    const data = await ContentData.save();
     return {
       status: "success",
       data: data,
@@ -232,10 +237,22 @@ const DeleteFileService = async (req, res) => {
   }
 };
 
-const ReadFileByIdService = async (req, res) => {
+const   ReadByFileIdService = async (req, res) => {
   try {
     let ContentID = new ObjectId(req.params.ContentID);
     let ReadByIdData = await Content.find({ _id: ContentID });
+    return {
+      status: "success",
+      data: ReadByIdData,
+    };
+  } catch (e) {
+    return { status: "Faild", message: e.toString() };
+  }
+};
+const   ReadByModuleIdService = async (req, res) => {
+  try {
+    let ModuleId = new ObjectId(req.params.ModuleId);
+    let ReadByIdData = await Content.find({ ModuleID: ModuleId });
     return {
       status: "success",
       data: ReadByIdData,
@@ -291,7 +308,8 @@ module.exports = {
   CreateFileService,
   UpdateFileService,
   DeleteFileService,
-  ReadFileByIdService,
+  ReadByFileIdService,
+  ReadByModuleIdService,
   ReadAllFileService,
 
   SearchByRemarkService,

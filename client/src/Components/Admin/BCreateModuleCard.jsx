@@ -102,7 +102,7 @@ const ModuleCard = () => {
                         Update
                       </button>
                     </Link>
-                    <Link to={"/UploadContentCard/ModuleID"}>
+                    <Link to={`/UploadContentCard/${request._id}`}>
                       <button className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md  mr-2">
                         Open
                       </button>

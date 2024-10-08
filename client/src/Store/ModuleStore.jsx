@@ -39,8 +39,6 @@ const ModuleStore = create((set) => ({
         withCredentials: true,
       }
     );
-    console.log(res);
-    
     if (res.data["status"] === "success") {
       set({ ReadModuleData: res.data["data"] });
     }
@@ -65,14 +63,13 @@ const ModuleStore = create((set) => ({
   ModuleData: { title: "", image: "", description: "" },
   ModuleDataChange: (name, value) => {
     set((state) => ({
-        ModuleData: {
+      ModuleData: {
         ...state.ModuleData,
         [name]: value,
       },
     }));
   },
   UpdateModuleRequest: async (id, postBody) => {
-    console.log(id, postBody);
     try {
       const res = await axios.post(
         `http://localhost:3000/courses/UpdateModule/${id}`,
@@ -81,8 +78,6 @@ const ModuleStore = create((set) => ({
           withCredentials: true,
         }
       );
-      console.log(res);
-
       return res.data["status"] === "success";
     } catch (e) {
       if (e.response.status === 401) {
@@ -91,15 +86,15 @@ const ModuleStore = create((set) => ({
       throw e;
     }
   },
-  ModuleData:null,
-  ReadRequestByModuleID: async (id) => { 
+  ModuleData: null,
+  ReadRequestByModuleID: async (id) => {
     const res = await axios.get(
       `http://localhost:3000/courses/ReadModuleByModuleId/${id}`,
       {
         withCredentials: true,
       }
     );
-    
+
     if (res.data["status"] === "success") {
       set({ ModuleData: res.data["data"][0] });
     }
