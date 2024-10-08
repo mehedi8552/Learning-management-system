@@ -1,16 +1,16 @@
 const {
   // CreateCourceService,
   ReadAllCourceService,
-   ReadCourceByIdService,
-   DeleteCourceService,
+  ReadCourceByIdService,
+  DeleteCourceService,
   UpdateCourceService,
-
 
   CreateModuleService,
   ReadCourceByinsIDService,
   UpdateModuleService,
   DeleteModuleService,
-  ReadModuleByIdService,
+  ReadModuleByModuleIdService,
+  ReadModuleByCourseIdService,
   ReadAllModuleService,
 
   CreateFileService,
@@ -20,8 +20,6 @@ const {
   ReadAllFileService,
 
   SearchByRemarkService,
-
-
 } = require("../Services/CourseServices");
 
 // exports.CreateCource = async (req, res) => {
@@ -45,7 +43,6 @@ exports.ReadCourceById = async (req, res) => {
   res.status(200).json(result);
 };
 
-
 // Course Modules Management Endpoints:
 exports.CreateModule = async (req, res) => {
   let result = await CreateModuleService(req);
@@ -64,15 +61,18 @@ exports.DeleteModule = async (req, res) => {
   res.status(200).json(result);
 };
 
-exports.ReadModuleById = async (req, res) => {
-  let result = await   ReadModuleByIdService(req);
+exports.ReadModuleByCourseId = async (req, res) => {
+  let result = await ReadModuleByCourseIdService(req);
+  res.status(200).json(result);
+};
+exports.ReadModuleByModuleId = async (req, res) => {
+  let result = await ReadModuleByModuleIdService(req);
   res.status(200).json(result);
 };
 exports.ReadAllModule = async (req, res) => {
   let result = await ReadAllModuleService(req);
   res.status(200).json(result);
 };
-
 
 exports.CreateFile = async (req, res) => {
   let result = await CreateFileService(req);
@@ -95,9 +95,7 @@ exports.ReadAllFile = async (req, res) => {
   res.status(200).json(result);
 };
 
-
 exports.SearchByRemark = async (req, res) => {
   let result = await SearchByRemarkService(req);
   res.status(200).json(result);
 };
-

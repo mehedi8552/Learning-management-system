@@ -135,10 +135,22 @@ const DeleteModuleService = async (req, res) => {
   }
 };
 
-const ReadModuleByIdService = async (req, res) => {
+const ReadModuleByCourseIdService = async (req, res) => {
   try {
     let CourseID = new ObjectId(req.params.CourceID);
     let ReadByIdData = await Module.find({ CourceID: CourseID });
+    return {
+      status: "success",
+      data: ReadByIdData,
+    };
+  } catch (e) {
+    return { status: "Faild", message: e.toString() };
+  }
+};
+const ReadModuleByModuleIdService = async (req, res) => {
+  try {
+    let ModuleID = new ObjectId(req.params.ModuleID);
+    let ReadByIdData = await Module.find({ _id: ModuleID });    
     return {
       status: "success",
       data: ReadByIdData,
@@ -270,10 +282,10 @@ module.exports = {
   UpdateCourceService,
 
   CreateModuleService,
-
   UpdateModuleService,
   DeleteModuleService,
-  ReadModuleByIdService,
+  ReadModuleByModuleIdService,
+  ReadModuleByCourseIdService,
   ReadAllModuleService,
 
   CreateFileService,

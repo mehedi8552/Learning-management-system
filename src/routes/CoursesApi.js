@@ -74,9 +74,9 @@ router.post("/DeleteModule/:ModuleID",
   authorizeRole("manageCourse"),
   CourseController.DeleteModule
 );
-router.get("/ReadModuleByCourseId/:CourceID", CourseController.ReadModuleById);
+router.get("/ReadModuleByCourseId/:CourceID", CourseController.ReadModuleByCourseId);
 
-// router.get("/ReadModuleByModuleId/:ModuleID", CourseController.ReadModuleById);
+router.get("/ReadModuleByModuleId/:ModuleID", CourseController.ReadModuleByModuleId);
 
 router.get("/ReadAllModule", CourseController.ReadAllModule);
 

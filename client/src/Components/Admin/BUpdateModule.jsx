@@ -4,10 +4,8 @@ import { useParams } from "react-router-dom";
 import ModuleStore from "../../Store/ModuleStore";
 
 const CreateModule = () => {
-  let { ModuleData,ReadRequestByModuleID } = ModuleStore();
+  let { ModuleData,ReadRequestByModuleID,ModuleDataChange ,UpdateModuleRequest} = ModuleStore();
   const { ModuleID } = useParams();
-  console.log(ModuleID);
-  
   useEffect(() => {
     (async () => {
       await ReadRequestByModuleID(ModuleID);
@@ -29,14 +27,17 @@ const CreateModule = () => {
             <label htmlFor="">Module Image</label>
             <input
             value={ModuleData?.image}
+            type={ModuleData?.image ? "text" : "file"}
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-              type={"text"}
             />
           </div>
           <div className="flex flex-col space-y-2">
-            <label htmlFor="">Module Name</label>
+            <label htmlFor="">Module Title</label>
             <input
-              value={ModuleData?.name}
+              value={ModuleData?.title}
+              onChange={(e) => {
+                ModuleDataChange("title", e.target.value);
+              }}
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               type="text"
             />
@@ -46,6 +47,9 @@ const CreateModule = () => {
             <label htmlFor="">Module description</label>
             <input
               value={ModuleData?.description}
+              onChange={(e) => {
+                ModuleDataChange("description", e.target.value);
+              }}
               className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               type="text"
             />
