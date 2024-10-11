@@ -1,5 +1,5 @@
 const express = require("express");
-
+require('dotenv').config()
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 var cors = require("cors");
@@ -32,6 +32,8 @@ app.use("/courses",require("./src/routes/CoursesApi"));//Courses Api
 
 
 // Start Server
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
+let PORT = 3000;
+app.listen(process.env.PORT || 10000, '0.0.0.0', () => {
+  console.log(`Server running on port ${process.env.PORT || 10000}`);
 });
+
