@@ -3,13 +3,14 @@ require('dotenv').config()
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 var cors = require("cors");
+const path = require('path');
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 app.use(cors({
   credentials:true,
-  origin:"http://localhost:5173"
+  origin:["http://localhost:5173","https://learning-management-system-u6jr.onrender.com/"]
 }));
 app.use(cookieParser());
 mongoose
@@ -27,10 +28,15 @@ app.get("/", async (req, res) => {
 });
 
 
-app.use("/auth",require("./src/routes/UserApi"));//Auth api
-app.use("/courses",require("./src/routes/CoursesApi"));//Courses Api
+app.use("/auth",require("./src/routes/UserApi"));//Require Auth api
+app.use("/courses",require("./src/routes/CoursesApi"));//Require Courses Api
 
+app.use(express.static('./client/dist'))
 
+// Add React Front End Routing
+app.get('*',(req,res)=> {
+    res.sendFile(path.resolve(__dirname,'./client','dist','index.html'))
+})
 // Start Server
 let PORT = 3000;
 app.listen(process.env.PORT || 10000, '0.0.0.0', () => {
