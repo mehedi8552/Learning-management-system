@@ -79,7 +79,7 @@ const UploadContentCard = () => {
                     />
                   </td>
                   <td className="px-4 py-2">{request.title}</td>
-                  <td className="px-4 py-2 "><iframe className="h-40" src={request.UR}></iframe></td>
+                  <td className="px-4 py-2 "><iframe className="h-40" src={request.URL}></iframe></td>
                   <td className="px-4 py-2">
                     <button onClick={() => DeleteContent(request._id)} className="bg-red-400 hover:bg-red-500 text-white px-3 py-1 rounded-md  mr-2">
                       Delete

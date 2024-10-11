@@ -30,8 +30,8 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <form className="bg-white p-6 rounded shadow-md" onSubmit={handleSubmit}>
+    <div className="flex justify-center items-center bg-cyan-200 h-screen">
+      <form className="bg-white p-6 rounded shadow-2xl" onSubmit={handleSubmit}>
         <h2 className="text-2xl mb-4 text-center font-bold">Login</h2>
         <input
           type="email"
